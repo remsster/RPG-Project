@@ -5,33 +5,29 @@ public class Mover : MonoBehaviour
 {
     [SerializeField] private Transform target;
 
-    private NavMeshAgent navMeshAgent;
-    private Ray lastRay;
+    private NavMeshAgent navMeshAgent;   
 
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            lastRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            MoveToCursor();
         }
-        Debug.DrawRay(lastRay.origin, lastRay.direction * 100);
-        MoveToTarget();
     }
 
-    private void MoveToTarget()
+    private void MoveToCursor()
     {
-        navMeshAgent.destination = target.position;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        bool hasHit = Physics.Raycast(ray, out hit);
+        if (hasHit)
+        {
+            navMeshAgent.destination = hit.point;
+        }
     }
 }

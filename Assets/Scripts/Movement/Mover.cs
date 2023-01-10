@@ -11,6 +11,10 @@ namespace RPG.Movement
 
         private readonly int forwardSpeedHash = Animator.StringToHash("forwardSpeed");
 
+        // ---------------------------------------------------------------------------------
+        // Unity Methods
+        // ---------------------------------------------------------------------------------
+
         private void Awake()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
@@ -21,6 +25,12 @@ namespace RPG.Movement
             UpdateAnimator();
         }
 
+        // ---------------------------------------------------------------------------------
+        // Custom Methods
+        // ---------------------------------------------------------------------------------
+
+        // ---- Private ----
+
         private void UpdateAnimator()
         {
             Vector3 velocity = navMeshAgent.velocity;
@@ -30,7 +40,7 @@ namespace RPG.Movement
             GetComponent<Animator>().SetFloat(forwardSpeedHash, speed);
         }
 
-
+        // ---- Public ----
 
         public void MoveTo(Vector3 destination)
         {

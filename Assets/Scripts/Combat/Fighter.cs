@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 using RPG.Movement;
+using RPG.Core;
 
 namespace RPG.Combat
 {
@@ -17,7 +18,6 @@ namespace RPG.Combat
 
         private void Update()
         {
-
             if (target == null) return;
             
             if (!IsInRange(target))
@@ -45,11 +45,8 @@ namespace RPG.Combat
 
         public void Attack(CombatTarget combatTarget)
         {
+            GetComponent<ActionScheduler>().StartAction(this);
             target = combatTarget.transform;
-            if (target != null)
-            {
-
-            }
         }
 
         // ---- Public ----

@@ -1,8 +1,6 @@
-﻿
+﻿using UnityEngine;
 
 using RPG.Movement;
-using System;
-using UnityEngine;
 
 namespace RPG.Combat
 {
@@ -19,8 +17,10 @@ namespace RPG.Combat
 
         private void Update()
         {
+
+            if (target == null) return;
             
-            if (target != null && !IsInRange(target))
+            if (!IsInRange(target))
             {
                 GetComponent<Mover>().MoveTo(target.position);
             }
@@ -34,6 +34,15 @@ namespace RPG.Combat
         // Custom Methods
         // ---------------------------------------------------------------------------------
 
+        // ---- Private ----
+
+        private bool IsInRange(Transform target)
+        {
+            //float distance = Vector3.Distance(transform.position, target.position);
+            float distance = (transform.position - target.position).magnitude;
+            return (distance < weaponRange);
+        }
+
         public void Attack(CombatTarget combatTarget)
         {
             target = combatTarget.transform;
@@ -43,11 +52,11 @@ namespace RPG.Combat
             }
         }
 
-        public bool IsInRange(Transform target)
+        // ---- Public ----
+
+        public void Cancel()
         {
-            //float distance = Vector3.Distance(transform.position, target.position);
-            float distance = (transform.position - target.position).magnitude;
-            return (distance < weaponRange);
+            target = null;
         }
     }
 }

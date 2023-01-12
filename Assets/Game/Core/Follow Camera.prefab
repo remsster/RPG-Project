@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3582067193114366439}
-  - component: {fileID: 3582067193114366438}
+  - component: {fileID: 9043239556673130300}
   m_Layer: 0
   m_Name: Follow Camera
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3582067193114366438
+--- !u!114 &9043239556673130300
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,7 +42,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3582067193114366437}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e596d145c8f276449fb2972ea2132d2, type: 3}
+  m_Script: {fileID: 11500000, guid: 4885cd82eb6c1e6499eecba568b32277, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}

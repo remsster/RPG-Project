@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using RPG.Movement;
-using System;
 using RPG.Combat;
 
 namespace RPG.Control
@@ -8,7 +7,7 @@ namespace RPG.Control
     public class PlayerController : MonoBehaviour
     {
         // ---------------------------------------------------------------------------------
-        // Unity Methods
+        // Unity Engine Methods
         // ---------------------------------------------------------------------------------
         private void Update()
         {
@@ -20,6 +19,8 @@ namespace RPG.Control
         // ---------------------------------------------------------------------------------
         // Custom Methods
         // ---------------------------------------------------------------------------------
+
+        // ---- Private ----
 
         private bool InteractWithCombat()
         {
@@ -38,16 +39,6 @@ namespace RPG.Control
             // We didnt find any combat targets to interact with
             return false;
         }
-
-        //private bool InteractWithMovement()
-        //{
-        //    if (Input.GetMouseButton(0))
-        //    {
-        //        MoveToCursor();
-        //        return true;
-        //    }
-        //    return false;
-        //}
 
         private bool InteractWithMovement()
         {

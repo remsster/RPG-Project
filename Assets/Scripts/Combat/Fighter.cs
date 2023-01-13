@@ -80,7 +80,7 @@ namespace RPG.Combat
             return (distance < weaponRange);
         }
 
-        public void Attack(CombatTarget combatTarget)
+        public void Attack(GameObject combatTarget)
         {
             GetComponent<ActionScheduler>().StartAction(this);
             target = combatTarget.GetComponent<Health>();
@@ -94,10 +94,11 @@ namespace RPG.Combat
 
         // ---- Public ----
 
-        public bool CanAttack(CombatTarget combatTarget) 
+        public bool CanAttack(GameObject combatTarget) 
         {
             if (combatTarget == null) return false;
-            return combatTarget != null && !combatTarget.GetComponent<Health>().IsDead;
+            Health targetToTest = combatTarget.GetComponent<Health>();
+            return combatTarget != null && !targetToTest.IsDead;
         } 
 
         // ---- IAction Methods ----

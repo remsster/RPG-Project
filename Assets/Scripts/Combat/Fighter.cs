@@ -9,10 +9,12 @@ namespace RPG.Combat
     {
 
         [SerializeField] private float weaponRange = 2f;
+        [SerializeField] private float timeBetweenAttacks = 1f;
 
         private readonly int attackTriggerHash = Animator.StringToHash("attack");
 
         private Transform target;
+        private float timeSinceLastAttack = 0;
 
         // ---------------------------------------------------------------------------------
         // Unity Engine Methods
@@ -20,6 +22,9 @@ namespace RPG.Combat
 
         private void Update()
         {
+
+            timeSinceLastAttack += Time.deltaTime;
+
             if (target == null) return;
 
             if (!IsInRange(target))
@@ -42,7 +47,11 @@ namespace RPG.Combat
 
         private void AttackBehaviour()
         {
-            GetComponent<Animator>().SetTrigger(attackTriggerHash);
+            if (timeSinceLastAttack > timeBetweenAttacks)
+            {
+                GetComponent<Animator>().SetTrigger(attackTriggerHash);
+                timeSinceLastAttack = 0;
+            }
         }
 
         private bool IsInRange(Transform target)

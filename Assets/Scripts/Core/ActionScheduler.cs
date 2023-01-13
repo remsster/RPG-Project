@@ -20,6 +20,11 @@ namespace RPG.Core
             // Set the new action to the current action
             currentAction = action;
         }
+
+        public void CancelCurrentAction()
+        {
+            StartAction(null);
+        }
     }
 }
 

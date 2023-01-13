@@ -3,6 +3,7 @@ using UnityEngine;
 
 using RPG.Movement;
 using RPG.Combat;
+using RPG.Core;
 
 namespace RPG.Control
 {
@@ -12,6 +13,7 @@ namespace RPG.Control
 
         private GameObject player;
         private Fighter fighter;
+        private Health AIHealth;
 
         private bool shouldChase = false;
 
@@ -23,10 +25,12 @@ namespace RPG.Control
         {
             player = GameObject.FindWithTag("Player");
             fighter = GetComponent<Fighter>();
+            AIHealth = GetComponent<Health>();
         }
 
         private void Update()
         {
+            if (AIHealth.IsDead) { return; }
             if (InAttackRange() && fighter.CanAttack(player))
             {
                 fighter.Attack(player);

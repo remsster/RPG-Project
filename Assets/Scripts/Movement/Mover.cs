@@ -8,6 +8,7 @@ namespace RPG.Movement
     public class Mover : MonoBehaviour, IAction
     {
         private NavMeshAgent navMeshAgent;
+        private Health health;
 
         private readonly int forwardSpeedHash = Animator.StringToHash("forwardSpeed");
 
@@ -18,10 +19,12 @@ namespace RPG.Movement
         private void Awake()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
+            health = GetComponent<Health>();
         }
 
         void Update()
         {
+            navMeshAgent.enabled = !health.IsDead;
             UpdateAnimator();
         }
 

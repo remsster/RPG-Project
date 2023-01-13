@@ -16,7 +16,7 @@ namespace RPG.Combat
         private readonly int stopAttackHash = Animator.StringToHash("stopAttack");
 
         private Health target;
-        private float timeSinceLastAttack = 0;
+        private float timeSinceLastAttack = Mathf.Infinity;
 
         // ---------------------------------------------------------------------------------
         // Unity Engine Methods

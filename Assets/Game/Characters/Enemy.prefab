@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6236319052623892017, guid: 4c09af74b7c6f664ca3a539ffe1cdcc1, type: 3}
+      propertyPath: health
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6907403536472197107, guid: 4c09af74b7c6f664ca3a539ffe1cdcc1, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -57,3 +61,96 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c09af74b7c6f664ca3a539ffe1cdcc1, type: 3}
+--- !u!4 &2155959316514798755 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6907403536472197107, guid: 4c09af74b7c6f664ca3a539ffe1cdcc1, type: 3}
+  m_PrefabInstance: {fileID: 4771431279767665488}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2155959316514798759 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6907403536472197111, guid: 4c09af74b7c6f664ca3a539ffe1cdcc1, type: 3}
+  m_PrefabInstance: {fileID: 4771431279767665488}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &-7287839595024218273
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2155959316514798759}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &-6520258203790907586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2155959316514798759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c620509e781b75c408aa46b6e64cadc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &7296333193190098496
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2155959316514798755}
+    m_Modifications:
+    - target: {fileID: 112422, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
+      propertyPath: m_Name
+      value: Character_Goblin_Warrior_Male
+      objectReference: {fileID: 0}
+    - target: {fileID: 407186, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 407186, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 407186, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 407186, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 407186, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 407186, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 407186, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 407186, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 407186, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 407186, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 407186, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}

@@ -14,7 +14,7 @@ namespace RPG.Control
         {
             if (InteractWithCombat()) return;
             if (InteractWithMovement()) return;
-            print("nothing to do");
+            print("PlayerController: nothing to do");
         }
 
         // ---------------------------------------------------------------------------------

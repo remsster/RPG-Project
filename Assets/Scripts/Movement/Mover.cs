@@ -7,8 +7,6 @@ namespace RPG.Movement
 {
     public class Mover : MonoBehaviour, IAction
     {
-        [SerializeField] private Transform target;
-
         private NavMeshAgent navMeshAgent;
 
         private readonly int forwardSpeedHash = Animator.StringToHash("forwardSpeed");

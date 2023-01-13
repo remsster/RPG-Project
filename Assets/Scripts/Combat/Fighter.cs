@@ -13,8 +13,9 @@ namespace RPG.Combat
         [SerializeField] private float weaponDamage = 5f;
 
         private readonly int attackTriggerHash = Animator.StringToHash("attack");
+        private readonly int stopAttackHash = Animator.StringToHash("stopAttack");
 
-        private Transform target;
+        private Health target;
         private float timeSinceLastAttack = 0;
 
         // ---------------------------------------------------------------------------------
@@ -27,10 +28,11 @@ namespace RPG.Combat
             timeSinceLastAttack += Time.deltaTime;
 
             if (target == null) return;
+            if (target.IsDead) { return; }
 
-            if (!IsInRange(target))
+            if (!IsInRange(target.transform))
             {
-                GetComponent<Mover>().MoveTo(target.position);
+                GetComponent<Mover>().MoveTo(target.transform.position);
             }
             else
             {
@@ -60,8 +62,7 @@ namespace RPG.Combat
         // Animation Event
         private void Hit()
         {
-            Health healthComponent = target.GetComponent<Health>();
-            healthComponent.TakeDamage(weaponDamage);
+            target.TakeDamage(weaponDamage);
         }
 
         private bool IsInRange(Transform target)
@@ -74,7 +75,7 @@ namespace RPG.Combat
         public void Attack(CombatTarget combatTarget)
         {
             GetComponent<ActionScheduler>().StartAction(this);
-            target = combatTarget.transform;
+            target = combatTarget.GetComponent<Health>();
         }
 
         // ---- Public ----
@@ -83,6 +84,7 @@ namespace RPG.Combat
         public void Cancel()
         {
             target = null;
+            GetComponent<Animator>().SetTrigger(stopAttackHash);
         }
     }
 }

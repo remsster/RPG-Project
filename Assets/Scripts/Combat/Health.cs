@@ -10,6 +10,8 @@ namespace RPG.Combat
         
         private bool isDead;
 
+        public bool IsDead => isDead;
+
         // ---- Private ----
 
         private void Die()

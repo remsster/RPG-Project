@@ -10,6 +10,7 @@ namespace RPG.Control
     public class AIController : MonoBehaviour
     {
         [SerializeField] private float chaseDistance = 5f;
+        [SerializeField] private float suspicionTime = 5f;
 
         private GameObject player;
         private Fighter fighter;
@@ -17,7 +18,7 @@ namespace RPG.Control
         private Mover mover;
         private Vector3 guardPosition;
 
-        private bool shouldChase = false;
+        private float timeSinceLastSawPlayer = Mathf.Infinity;
 
         // ---------------------------------------------------------------------------------
         // Unity Methods
@@ -41,15 +42,21 @@ namespace RPG.Control
             if (health.IsDead) { return; }
             if (InAttackRange() && fighter.CanAttack(player))
             {
-                fighter.Attack(player);
+                timeSinceLastSawPlayer = 0;
+                AttackBehaviour();
+            }
+            else if (timeSinceLastSawPlayer < suspicionTime)
+            {
+                SuspcicionBehaviour();
             }
             else
             {
-                mover.StartMoveAction(guardPosition);
+                GuardBehaviour();
             }
+
+            timeSinceLastSawPlayer += Time.deltaTime;
         }
 
-        
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;
@@ -67,6 +74,21 @@ namespace RPG.Control
         {
             float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
             return distanceToPlayer < chaseDistance;
+        }
+
+        private void GuardBehaviour()
+        {
+            mover.StartMoveAction(guardPosition);
+        }
+
+        private void SuspcicionBehaviour()
+        {
+            GetComponent<ActionScheduler>().CancelCurrentAction();
+        }
+
+        private void AttackBehaviour()
+        {
+            fighter.Attack(player);
         }
     }
 

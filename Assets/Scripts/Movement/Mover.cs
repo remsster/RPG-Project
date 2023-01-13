@@ -29,8 +29,6 @@ namespace RPG.Movement
         // Custom Methods
         // ---------------------------------------------------------------------------------
 
-
-
         // ---- Private ----
 
         private void UpdateAnimator()

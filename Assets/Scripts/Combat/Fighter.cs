@@ -60,6 +60,11 @@ namespace RPG.Combat
             }
         }
 
+        
+
+
+
+
         // Animation Event
         private void Hit()
         {
@@ -80,6 +85,12 @@ namespace RPG.Combat
         }
 
         // ---- Public ----
+
+        public bool CanAttack(CombatTarget combatTarget) 
+        {
+            if (combatTarget == null) return false;
+            return combatTarget != null && !combatTarget.GetComponent<Health>().IsDead;
+        } 
 
         // ---- IAction Methods ----
         public void Cancel()

@@ -10,6 +10,8 @@ namespace RPG.Combat
 
         [SerializeField] private float weaponRange = 2f;
 
+        private readonly int attackTriggerHash = Animator.StringToHash("attack");
+
         private Transform target;
 
         // ---------------------------------------------------------------------------------
@@ -27,14 +29,21 @@ namespace RPG.Combat
             else
             {
                 GetComponent<Mover>().Cancel();
+                AttackBehaviour();
             }
         }
+
 
         // ---------------------------------------------------------------------------------
         // Custom Methods
         // ---------------------------------------------------------------------------------
 
         // ---- Private ----
+
+        private void AttackBehaviour()
+        {
+            GetComponent<Animator>().SetTrigger(attackTriggerHash);
+        }
 
         private bool IsInRange(Transform target)
         {
@@ -47,6 +56,12 @@ namespace RPG.Combat
         {
             GetComponent<ActionScheduler>().StartAction(this);
             target = combatTarget.transform;
+        }
+
+        // Animation Event
+        private void Hit()
+        {
+            Debug.Log("Attack!!!");
         }
 
         // ---- Public ----

@@ -13,7 +13,9 @@ namespace RPG.Control
 
         private GameObject player;
         private Fighter fighter;
-        private Health AIHealth;
+        private Health health;
+        private Mover mover;
+        private Vector3 guardPosition;
 
         private bool shouldChase = false;
 
@@ -25,19 +27,25 @@ namespace RPG.Control
         {
             player = GameObject.FindWithTag("Player");
             fighter = GetComponent<Fighter>();
-            AIHealth = GetComponent<Health>();
+            health = GetComponent<Health>();
+            mover = GetComponent<Mover>();
+        }
+
+        private void Start()
+        {
+            guardPosition = transform.position;
         }
 
         private void Update()
         {
-            if (AIHealth.IsDead) { return; }
+            if (health.IsDead) { return; }
             if (InAttackRange() && fighter.CanAttack(player))
             {
                 fighter.Attack(player);
             }
             else
             {
-                fighter.Cancel();
+                mover.StartMoveAction(guardPosition);
             }
         }
 

@@ -8,7 +8,7 @@ namespace RPG.Control
 {
     public class PlayerController : MonoBehaviour
     {
-        Health playerHealth;
+        Health health;
 
         // ---------------------------------------------------------------------------------
         // Unity Engine Methods
@@ -16,12 +16,12 @@ namespace RPG.Control
 
         private void Awake()
         {
-            playerHealth = GetComponent<Health>();
+            health = GetComponent<Health>();
         }
 
         private void Update()
         {
-            if (playerHealth.IsDead) { return; }
+            if (health.IsDead) { return; }
             if (InteractWithCombat()) return;
             if (InteractWithMovement()) return;
         }

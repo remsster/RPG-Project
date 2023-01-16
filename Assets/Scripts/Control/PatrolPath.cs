@@ -10,20 +10,20 @@ namespace RPG.Control
         {
             for(int i = 0; i < transform.childCount; i++)
             {
-                int j = GetNextIndex(i, transform.childCount);
+                int j = GetNextIndex(i);
                 Gizmos.DrawSphere(GetWaypoint(i), RADIUS);
                 Gizmos.DrawLine(GetWaypoint(i), GetWaypoint(j));
             }
         }
 
-        private int GetNextIndex(int i, int maxWaypoints)
+        public int GetNextIndex(int i)
         {
             int nextIndex = i + 1;
-            if (nextIndex == maxWaypoints) nextIndex = 0;
+            if (nextIndex == transform.childCount) nextIndex = 0;
             return nextIndex;
         }
 
-        private Vector3 GetWaypoint(int i)
+        public Vector3 GetWaypoint(int i)
         {
             return transform.GetChild(i).position;
         }

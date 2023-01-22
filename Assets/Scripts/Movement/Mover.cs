@@ -7,8 +7,11 @@ namespace RPG.Movement
 {
     public class Mover : MonoBehaviour, IAction
     {
+        [Range(0,1)]
+        [SerializeField] private float maxSpeed = 5.66f;
         private NavMeshAgent navMeshAgent;
         private Health health;
+
 
         private readonly int forwardSpeedHash = Animator.StringToHash("forwardSpeed");
 
@@ -53,17 +56,17 @@ namespace RPG.Movement
         }
         
 
-        public void StartMoveAction(Vector3 destination)
+        public void StartMoveAction(Vector3 destination, float speedFraction)
         {
             GetComponent<ActionScheduler>().StartAction(this);
-            // GetComponent<Fighter>().Cancel();
-            MoveTo(destination);
+            MoveTo(destination,speedFraction);
         }
 
 
-        public void MoveTo(Vector3 destination)
+        public void MoveTo(Vector3 destination, float speedFraction)
         {
             navMeshAgent.destination = destination;
+            navMeshAgent.speed = maxSpeed * Mathf.Clamp01(speedFraction);
             navMeshAgent.isStopped = false;
         }
     }

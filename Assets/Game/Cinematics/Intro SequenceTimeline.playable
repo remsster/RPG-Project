@@ -117,16 +117,16 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 1.5
+    m_Start: 0.55
     m_ClipIn: 0
     m_Asset: {fileID: -7515674742151229230}
-    m_Duration: 4
+    m_Duration: 4.9499999999999975
     m_TimeScale: 1
     m_ParentTrack: {fileID: 2656993416238300327}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: 1
-    m_BlendOutDuration: 1
+    m_BlendOutDuration: 0.9999999999999973
     m_MixInCurve:
       serializedVersion: 2
       m_Curve:
@@ -194,7 +194,7 @@ MonoBehaviour:
     m_ParentTrack: {fileID: 2656993416238300327}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
-    m_BlendInDuration: 1
+    m_BlendInDuration: 0.9999999999999973
     m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
@@ -237,10 +237,10 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: CM Reveal 2
   - m_Version: 1
-    m_Start: 0.38333333333333286
+    m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 4018361274776391567}
-    m_Duration: 2.116666666666667
+    m_Duration: 1.55
     m_TimeScale: 1
     m_ParentTrack: {fileID: 2656993416238300327}
     m_EaseInDuration: 0

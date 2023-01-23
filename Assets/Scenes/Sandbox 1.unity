@@ -333,6 +333,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4485062155413527727, guid: 44d1006968544d54fabeab73cc501393, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485062155413527727, guid: 44d1006968544d54fabeab73cc501393, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485062155413527727, guid: 44d1006968544d54fabeab73cc501393, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485062155413527727, guid: 44d1006968544d54fabeab73cc501393, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485062155413527727, guid: 44d1006968544d54fabeab73cc501393, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485062155413527727, guid: 44d1006968544d54fabeab73cc501393, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 4519721726330286116, guid: 44d1006968544d54fabeab73cc501393, type: 3}
       propertyPath: m_Name
       value: Portal

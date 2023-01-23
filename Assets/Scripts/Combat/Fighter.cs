@@ -106,6 +106,7 @@ namespace RPG.Combat
         {
             target = null;
             StopAttack();
+            GetComponent<Mover>().Cancel();
         }
 
     }

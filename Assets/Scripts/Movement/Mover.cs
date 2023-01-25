@@ -3,6 +3,7 @@ using UnityEngine.AI;
 
 using RPG.Core;
 using RPG.Saving;
+using System.Collections.Generic;
 
 namespace RPG.Movement
 {
@@ -42,18 +43,55 @@ namespace RPG.Movement
             navMeshAgent.isStopped = true;
         }
 
+        [System.Serializable]
+        struct MoverSaveData
+        {
+            public SerializableVector3 position;
+            public SerializableVector3 rotation;
+        }
+
         // ---- ISaveable ----
         public object CaptureState()
         {
+            // Saving with Dictionary
+            /* 
+            Dictionary<string, object> data = new Dictionary<string, object>();
+            data["position"] = new SerializableVector3(transform.position);
+            data["rotation"] = new SerializableVector3(transform.eulerAngles);
+            */
+
+            // Saving with struct
+            MoverSaveData data = new MoverSaveData();
+            data.position = new SerializableVector3(transform.position);
+            data.rotation = new SerializableVector3(transform.eulerAngles);
+
+            //return data;
             return new SerializableVector3(transform.position);
         }
 
         public void RestoreState(object state)
         {
+            // Loading with Dictionary
+            /*
+            Dictionary<string, object> data = (Dictionary<string,object>)state;
+            SerializableVector3 position = (SerializableVector3)data["position"];
+            SerializableVector3 rotation = (SerializableVector3)data["rotation"];
+            */
+
+            // Loading with Struct
+            /*
+            MoverSaveData data = (MoverSaveData)state;
+            SerializableVector3 position = data.position;
+            SerializableVector3 rotation = data.rotation;
+            */
+
             SerializableVector3 position = (SerializableVector3)state;
             GetComponent<NavMeshAgent>().enabled = false;
             transform.position = position.ToVector();
+            //transform.eulerAngles = rotation.ToVector();
             GetComponent<NavMeshAgent>().enabled = true;
+
+            
         }
 
         // ---------------------------------------------------------------------------------

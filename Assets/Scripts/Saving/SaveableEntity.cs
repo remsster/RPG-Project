@@ -1,4 +1,5 @@
 ﻿using RPG.Core;
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -10,12 +11,14 @@ namespace RPG.Saving
     public class SaveableEntity : MonoBehaviour
     {
         [SerializeField] string uniqueIdentifier = "";
+        static Dictionary<string, SaveableEntity> globalLookup = new Dictionary<string, SaveableEntity>();
 
         public string GetUniqueIdentifier() => uniqueIdentifier;
 
         // ---------------------------------------------------------------------------------
         // Unity Engine Methods
         // ---------------------------------------------------------------------------------
+
 #if UNITY_EDITOR
         // Not included in build
         private void Update()
@@ -25,12 +28,35 @@ namespace RPG.Saving
             SerializedObject serializedObject = new SerializedObject(this);
             SerializedProperty property = serializedObject.FindProperty(nameof(uniqueIdentifier));
             
-            if (string.IsNullOrEmpty(property.stringValue))
+            if (string.IsNullOrEmpty(property.stringValue) || !IsUnique(property.stringValue))
             {
                 property.stringValue = System.Guid.NewGuid().ToString();
                 serializedObject.ApplyModifiedProperties();
             }
 
+            globalLookup[property.stringValue] = this;
+
+        }
+
+        private bool IsUnique(string candidate)
+        {
+            // check if key exist in dictionary
+            if (!globalLookup.ContainsKey(candidate)) return true;
+            // check if not point to self
+            if (globalLookup[candidate] == this) return true;
+            if (globalLookup[candidate] == null)
+            {
+                // has been deleted from the global lookup;
+                // by changing scenes
+                globalLookup.Remove(candidate);
+                return true;
+            }
+            if (globalLookup[candidate].GetUniqueIdentifier() != candidate)
+            {
+                globalLookup.Remove(candidate);
+                return true;
+            }
+                return false;
         }
 #endif
 

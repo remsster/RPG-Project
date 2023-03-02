@@ -2,9 +2,18 @@
 
 namespace RPG.Saving
 {
+    [ExecuteAlways]
     public class SaveableEntity : MonoBehaviour
     {
+        [SerializeField] string uniqueIdentifier = "";
+
         public string GetUniqueIdentifier() => "";
+
+        private void Update()
+        {
+            if (Application.IsPlaying(gameObject)) return;
+            print("Editing");
+        }
 
         public object CaptureState()
         {

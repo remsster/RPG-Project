@@ -21,26 +21,33 @@ namespace RPG.Saving
             return Path.Combine(Application.persistentDataPath, saveFile);
         }
 
-        private Dictionary<string, object> CaptureState()
+        private void CaptureState(Dictionary<string, object> state)
         {
-            Dictionary<string, object> state = new Dictionary<string, object>();
-           
             foreach(SaveableEntity saveable in FindObjectsOfType<SaveableEntity>())
             {
                 state[saveable.GetUniqueIdentifier()] =  saveable.CaptureState();
             }
-            return state; 
         }
 
         private void RestoreState(Dictionary<string, object> state)
         {
             foreach (SaveableEntity saveable in FindObjectsOfType<SaveableEntity>())
             {
-                saveable.RestoreState(state[saveable.GetUniqueIdentifier()]);
+                string id = saveable.GetUniqueIdentifier();
+                if(state.ContainsKey(id))
+                {
+                    saveable.RestoreState(state[id]);
+                }
             }
 
         }
 
+
+        /// <summary>
+        /// All this does is serialize data
+        /// </summary>
+        /// <param name="saveFile">the file thay the data is saved to</param>
+        /// <param name="state">captured game state</param>
         private void SaveFile(string saveFile, object state)
         {
             string path = GetPathFromSaveFile(saveFile);
@@ -51,10 +58,19 @@ namespace RPG.Saving
                 formatter.Serialize(fstream, state);
             }
         }
-
+        
+        /// <summary>
+        /// All this does is dserialize data
+        /// </summary>
+        /// <param name="saveFile">The file to load the data from</param>
+        /// <returns>deserialized data that can update game state</returns>
         private Dictionary<string,object> LoadFile(string saveFile)
         {
             string path = GetPathFromSaveFile(saveFile);
+            if (!File.Exists(path))
+            {
+                return new Dictionary<string, object>();
+            }
             using (FileStream fstream = File.Open(path, FileMode.Open))
             {
                 BinaryFormatter formatter = new BinaryFormatter();
@@ -69,14 +85,16 @@ namespace RPG.Saving
             string path = GetPathFromSaveFile(saveFile);
             if (File.Exists(path))
             {
-                print("Deleting file");
+                print("File Deleted");
                 File.Delete(path);
             }
         }
 
         public void Save(string saveFile)
-        {   
-            SaveFile(saveFile, CaptureState());
+        {
+            Dictionary<string,object> state = LoadFile(saveFile);
+            CaptureState(state);
+            SaveFile(saveFile, state);
         }
 
         public void Load(string saveFile)

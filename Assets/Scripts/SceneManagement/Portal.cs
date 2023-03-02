@@ -18,7 +18,7 @@ namespace RPG.SceneManagement
         [SerializeField] DestinationIdentifier destination;
 
         [SerializeField] private float fadeOutTime = 1f;
-        [SerializeField] private float fadeInTime = 2f;
+        [SerializeField] private float fadeInTime = 3f;
         [SerializeField] private float fadeWaitTime = .5f;
 
 
@@ -49,7 +49,7 @@ namespace RPG.SceneManagement
             UpdatePlayer(otherPortal);
 
             yield return new WaitForSeconds(fadeWaitTime);
-            yield return fader.FadeIn(3f);
+            yield return fader.FadeIn(fadeInTime);
 
             Destroy(this.gameObject);
         }

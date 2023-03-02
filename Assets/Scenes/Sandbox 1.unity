@@ -971,6 +971,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 723646261}
     m_Modifications:
+    - target: {fileID: 351010830565117284, guid: 67d6de81b41693542869ce68ef2771d2, type: 3}
+      propertyPath: uniqueIdentifier
+      value: d1f6daca-0d61-4c14-9ec3-e1a59a80d428
+      objectReference: {fileID: 0}
     - target: {fileID: 2155959316514798755, guid: 67d6de81b41693542869ce68ef2771d2, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1192,6 +1196,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 723646261}
     m_Modifications:
+    - target: {fileID: 351010830565117284, guid: 67d6de81b41693542869ce68ef2771d2, type: 3}
+      propertyPath: uniqueIdentifier
+      value: dcf6c3c1-96da-4e7d-90f6-ed999e4241b3
+      objectReference: {fileID: 0}
     - target: {fileID: 2155959316514798755, guid: 67d6de81b41693542869ce68ef2771d2, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1864,6 +1872,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 723646261}
     m_Modifications:
+    - target: {fileID: 351010830565117284, guid: 67d6de81b41693542869ce68ef2771d2, type: 3}
+      propertyPath: uniqueIdentifier
+      value: fd3f7293-b221-47ce-b4d2-7dcde45057f0
+      objectReference: {fileID: 0}
     - target: {fileID: 2155959316514798755, guid: 67d6de81b41693542869ce68ef2771d2, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -3132,6 +3144,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 723646261}
     m_Modifications:
+    - target: {fileID: 351010830565117284, guid: 67d6de81b41693542869ce68ef2771d2, type: 3}
+      propertyPath: uniqueIdentifier
+      value: 441e63d4-6348-4103-9b59-639fb2e064f5
+      objectReference: {fileID: 0}
     - target: {fileID: 2155959316514798755, guid: 67d6de81b41693542869ce68ef2771d2, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -3538,6 +3554,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1017224326329176348, guid: 741b89c5175cf754385179456e5428f4, type: 3}
+      propertyPath: uniqueIdentifier
+      value: 67c62ea5-9889-41a9-9404-ebf6c7bde64c
+      objectReference: {fileID: 0}
     - target: {fileID: 1668974866429403355, guid: 741b89c5175cf754385179456e5428f4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.3

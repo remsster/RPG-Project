@@ -1,32 +1,70 @@
+using System;
 using System.IO;
 using System.Text;
 using UnityEngine;
-
-
+using UnityEngine.AI;
 
 namespace RPG.Saving
 {
     public class SavingSystem : MonoBehaviour
     {
 
+        // ---------------------------------------------------------------------------------
+        // Custom Methods
+        // ---------------------------------------------------------------------------------
+
+        // ---- Private ----
+
         private string GetPathFromSaveFile(string saveFile)
         {
             return Path.Combine(Application.persistentDataPath, saveFile);
         }
 
+        private byte[] SerializeVector(Vector3 vector)
+        {
+            byte[] vectorBytes = new byte[3 * 4];
+            BitConverter.GetBytes(vector.x).CopyTo(vectorBytes, 0);
+            BitConverter.GetBytes(vector.y).CopyTo(vectorBytes, 4);
+            BitConverter.GetBytes(vector.z).CopyTo(vectorBytes, 8);
+            return vectorBytes;
+        }
+
+        private Vector3 DeserializeVector3(byte[] buffer)
+        {
+            Vector3 result = new Vector3();
+            result.x = BitConverter.ToSingle(buffer, 0);
+            result.y = BitConverter.ToSingle(buffer, 4);
+            result.z = BitConverter.ToSingle(buffer, 8);
+            return result;
+        }
+
+        private Transform GetPlayerTransform()
+        {
+            return GameObject.FindWithTag("Player").transform;
+        }
+
+        // ---- Public ----
+
+        public void Delete(string saveFile)
+        {
+            string path = GetPathFromSaveFile(saveFile);
+            if (File.Exists(path))
+            {
+                print("Deleting file");
+                File.Delete(path);
+            }
+            
+        }
+
         public void Save(string saveFile)
         {
             string path = GetPathFromSaveFile(saveFile);
-            print("Saving to " + path);
-            ;
 
             using(FileStream fstream = File.Open(path, FileMode.Create))
             {
-                string text = "Hello World";
-                byte[] buffer = Encoding.UTF8.GetBytes(text);
-                byte[] spanishBuffer = { 0x0d, 0xc2 ,0xa1, 0x48, 0x6f, 0x6c, 0x61, 0x20, 0x4d, 0x75, 0x6e, 0x64, 0x6f, 0x21 };
+                Transform playerTransform = GetPlayerTransform();
+                byte[] buffer = SerializeVector(playerTransform.position);
                 fstream.Write(buffer, 0, buffer.Length);
-                fstream.Write(spanishBuffer, 0, spanishBuffer.Length);
             }
         }
 
@@ -37,9 +75,9 @@ namespace RPG.Saving
             using (FileStream fstream = File.Open(path, FileMode.Open))
             {
                 byte[] buffer = new byte[fstream.Length];
-                fstream.Read(buffer,0, buffer.Length);
-                string text = Encoding.UTF8.GetString(buffer);
-                Debug.Log(text);
+                fstream.Read(buffer, 0, buffer.Length);
+                Transform playerTransform = GetPlayerTransform();
+                playerTransform.position = DeserializeVector3(buffer);
             }
         }
     }

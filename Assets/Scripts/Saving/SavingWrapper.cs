@@ -19,6 +19,10 @@ namespace RPG.Saving
             {
                 GetComponent<SavingSystem>().Load(DEFAULT_SAVE_FILE);
             }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                GetComponent<SavingSystem>().Delete(DEFAULT_SAVE_FILE);
+            }
 
         }
     }

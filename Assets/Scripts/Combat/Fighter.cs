@@ -11,6 +11,8 @@ namespace RPG.Combat
         [SerializeField] private float weaponRange = 2f;
         [SerializeField] private float timeBetweenAttacks = 1f;
         [SerializeField] private float weaponDamage = 5f;
+        [SerializeField] private GameObject weaponPrefab = null;
+        [SerializeField] private Transform handTransform = null;
 
         private readonly int attackTriggerHash = Animator.StringToHash("attack");
         private readonly int stopAttackHash = Animator.StringToHash("stopAttack");
@@ -21,6 +23,11 @@ namespace RPG.Combat
         // ---------------------------------------------------------------------------------
         // Unity Engine Methods
         // ---------------------------------------------------------------------------------
+
+        private void Start()
+        {
+            SpawnWeapon();
+        }
 
         private void Update()
         {
@@ -47,6 +54,12 @@ namespace RPG.Combat
         // ---------------------------------------------------------------------------------
 
         // ---- Private ----
+
+        private void SpawnWeapon()
+        {
+            if (handTransform == null) return;
+            Instantiate(weaponPrefab, handTransform);
+        }
 
         private void AttackBehaviour()
         {

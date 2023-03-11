@@ -7,11 +7,20 @@ namespace RPG.Combat
     {
         // things that will change based on the weapon that we are weilding
         [SerializeField] private AnimatorOverrideController animatorOverride = null;
-        [SerializeField] private GameObject weaponPrefab = null;
+        [SerializeField] private GameObject equippedPrefab = null;
+        [SerializeField] private float weaponRange = 2f;
+        [SerializeField] private float weaponDamage = 5f;
+
+        public float Range => weaponRange;
+        public float Damage => weaponDamage;
 
         public void Spawn(Transform handTransform, Animator animator)
         {
-            Instantiate(weaponPrefab, handTransform);
+            if (equippedPrefab != null)
+            {
+                Instantiate(equippedPrefab, handTransform);
+            }
+            if (animatorOverride != null)
             animator.runtimeAnimatorController = animatorOverride;
         }
     }

@@ -13,6 +13,7 @@ namespace RPG.Combat
         [SerializeField] private float weaponDamage = 5f;
         [SerializeField] private GameObject weaponPrefab = null;
         [SerializeField] private Transform handTransform = null;
+        [SerializeField] private AnimatorOverrideController weaponOverride = null;
 
         private readonly int attackTriggerHash = Animator.StringToHash("attack");
         private readonly int stopAttackHash = Animator.StringToHash("stopAttack");
@@ -59,6 +60,8 @@ namespace RPG.Combat
         {
             if (handTransform == null) return;
             Instantiate(weaponPrefab, handTransform);
+            Animator animator = GetComponent<Animator>();
+            animator.runtimeAnimatorController = weaponOverride;
         }
 
         private void AttackBehaviour()

@@ -10,7 +10,7 @@ namespace RPG.Combat
 
         [SerializeField] private float timeBetweenAttacks = 1f;
         [SerializeField] private Transform handTransform = null;
-        [SerializeField] private Weapon weapon = null;
+        [SerializeField] private Weapon defaultWeapon = null;
         
 
         private readonly int attackTriggerHash = Animator.StringToHash("attack");
@@ -18,6 +18,7 @@ namespace RPG.Combat
 
         private Health target;
         private float timeSinceLastAttack = Mathf.Infinity;
+        private Weapon currentWeapon;
 
         // ---------------------------------------------------------------------------------
         // Unity Engine Methods
@@ -25,7 +26,7 @@ namespace RPG.Combat
 
         private void Start()
         {
-            SpawnWeapon();
+            EquipWeapon(defaultWeapon);
         }
 
         private void Update()
@@ -54,13 +55,6 @@ namespace RPG.Combat
 
         // ---- Private ----
 
-        private void SpawnWeapon()
-        {
-            if (weapon == null) return;
-            Animator animator = GetComponent<Animator>();
-            weapon.Spawn(handTransform, animator);
-        }
-
         private void AttackBehaviour()
         {
             transform.LookAt(target.transform);
@@ -83,14 +77,14 @@ namespace RPG.Combat
         private void Hit()
         {
             if (target == null) { return; }
-            target.TakeDamage(weapon.Damage);
+            target.TakeDamage(currentWeapon.Damage);
         }
 
         private bool IsInRange(Transform target)
         {
             //float distance = Vector3.Distance(transform.position, target.position);
             float distance = (transform.position - target.position).magnitude;
-            return (distance < weapon.Range);
+            return (distance < currentWeapon.Range);
         }
 
         public void Attack(GameObject combatTarget)
@@ -106,6 +100,13 @@ namespace RPG.Combat
         }
 
         // ---- Public ----
+
+        public void EquipWeapon(Weapon weapon)
+        {
+            currentWeapon = weapon;
+            Animator animator = GetComponent<Animator>();
+            weapon.Spawn(handTransform, animator);
+        }
 
         public bool CanAttack(GameObject combatTarget) 
         {

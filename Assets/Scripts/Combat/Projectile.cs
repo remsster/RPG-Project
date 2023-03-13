@@ -1,16 +1,16 @@
-using RPG.Control;
 using UnityEngine;
+using RPG.Core;
 
 namespace RPG.Combat
 {
     public class Projectile : MonoBehaviour
     {
         [SerializeField] private float speed = 1f;
-        private Transform target;
+        private Health target;
 
         private void Start()
         {
-            target = FindObjectOfType<PlayerController>().transform;
+            
         }
 
         private void Update()
@@ -29,6 +29,11 @@ namespace RPG.Combat
 
         private Vector3 AimLocation => target.TryGetComponent<CapsuleCollider>(out CapsuleCollider targetCollider) ?
             targetCollider.transform.position + Vector3.up * targetCollider.height / 2 : targetCollider.transform.position;
+
+        public void SetTarget(Health target)
+        {
+            this.target = target;
+        }
     }
 }
 

@@ -7,11 +7,11 @@ namespace RPG.Combat
     {
         [SerializeField] private float speed = 1f;
         private Health target;
+        private float damage = 0;
 
-        private void Start()
-        {
-            
-        }
+        // ---------------------------------------------------------------------------------
+        // Unity Engine Methods
+        // ---------------------------------------------------------------------------------
 
         private void Update()
         {
@@ -19,6 +19,17 @@ namespace RPG.Combat
             transform.LookAt(AimLocation);
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
+
+        private void OnTriggerEnter(Collider collision)
+        {
+            if (collision.GetComponent<Health>() != target) return;
+            target.TakeDamage(damage);
+            Destroy(gameObject);
+        }
+
+        // ---------------------------------------------------------------------------------
+        // Custom Methods
+        // ---------------------------------------------------------------------------------
 
         //private Vector3 GetAimLocation()
         //{
@@ -30,9 +41,10 @@ namespace RPG.Combat
         private Vector3 AimLocation => target.TryGetComponent<CapsuleCollider>(out CapsuleCollider targetCollider) ?
             targetCollider.transform.position + Vector3.up * targetCollider.height / 2 : targetCollider.transform.position;
 
-        public void SetTarget(Health target)
+        public void SetTarget(Health target, float damage)
         {
             this.target = target;
+            this.damage = damage;
         }
     }
 }

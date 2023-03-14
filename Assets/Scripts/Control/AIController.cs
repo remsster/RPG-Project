@@ -13,7 +13,7 @@ namespace RPG.Control
     {
         [SerializeField] private float chaseDistance = 5f;
         [SerializeField] private float suspicionTime = 5f;
-        [SerializeField] private float waypointTollerance = 1f;
+        [SerializeField] private float waypointTollerance = 1f; // its basically the stopping distance
         [SerializeField] private float dwellTime = 5f;
         [Range(0, 1)]
         [SerializeField] private float patrolSpeedFraction = 0.2f;

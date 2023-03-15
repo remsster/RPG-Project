@@ -4882,7 +4882,7 @@ GameObject:
   - component: {fileID: -4035268257186206750}
   - component: {fileID: 6325781128317339441}
   m_Layer: 0
-  m_Name: Magic Projectile
+  m_Name: Fireball Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4918,8 +4918,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  isHoaming: 0
+  isHoaming: 1
   hitEffect: {fileID: 2302457091093092515, guid: 69d1b1037536b504884c93bb73d662db, type: 3}
+  maxLifeTime: 10
+  lifeAfterImpact: 0.2
+  destroyOnHit:
+  - {fileID: 615311720734417941}
 --- !u!65 &6325781128317339441
 BoxCollider:
   m_ObjectHideFlags: 0

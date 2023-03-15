@@ -6,6 +6,7 @@ namespace RPG.Combat
     public class Projectile : MonoBehaviour
     {
         [SerializeField] private float speed = 1f;
+        [SerializeField] private bool isHoaming = false;
         private Health target;
         private float damage = 0;
 
@@ -13,16 +14,27 @@ namespace RPG.Combat
         // Unity Engine Methods
         // ---------------------------------------------------------------------------------
 
+        private void Start()
+        {
+            transform.LookAt(AimLocation);
+            Destroy(gameObject, 10f);
+        }
+
         private void Update()
         {
             if (target == null) return;
-            transform.LookAt(AimLocation);
+            if (isHoaming && !target.IsDead)
+            {
+                transform.LookAt(AimLocation);
+            }
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
 
         private void OnTriggerEnter(Collider collision)
         {
             if (collision.GetComponent<Health>() != target) return;
+            if (target.IsDead) return;
+            
             target.TakeDamage(damage);
             Destroy(gameObject);
         }

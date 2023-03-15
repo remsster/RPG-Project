@@ -12,6 +12,7 @@ namespace RPG.Combat
         [SerializeField] private Transform rightHandTransform = null;
         [SerializeField] private Transform leftHandTransform = null;
         [SerializeField] private Weapon defaultWeapon = null;
+        [SerializeField] private string defaultWeaponName = "Unarmed";
         
 
         private readonly int attackTriggerHash = Animator.StringToHash("attack");
@@ -27,7 +28,8 @@ namespace RPG.Combat
 
         private void Start()
         {
-            EquipWeapon(defaultWeapon);
+            Weapon weapon = Resources.Load<Weapon>(defaultWeaponName);
+            EquipWeapon(weapon);
         }
 
         private void Update()

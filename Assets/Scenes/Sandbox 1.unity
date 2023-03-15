@@ -3841,10 +3841,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 400546240937530103, guid: 741b89c5175cf754385179456e5428f4, type: 3}
-      propertyPath: defaultWeaponName
-      value: Sword
-      objectReference: {fileID: 0}
     - target: {fileID: 649579184746421609, guid: 741b89c5175cf754385179456e5428f4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -10.457

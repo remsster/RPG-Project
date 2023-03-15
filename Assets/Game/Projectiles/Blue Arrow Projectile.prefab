@@ -75,9 +75,13 @@ PrefabInstance:
       propertyPath: m_Parameters.colorGradient.m_NumColorKeys
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2440525627152193822, guid: 44126a3f708fcfb48a039f5e3fc5ed12, type: 3}
+      propertyPath: hitEffect
+      value: 
+      objectReference: {fileID: 5486587932481786686, guid: 4c3532e493226014c9d53423eff6a829, type: 3}
     - target: {fileID: 2521682131402169523, guid: 44126a3f708fcfb48a039f5e3fc5ed12, type: 3}
       propertyPath: m_Name
-      value: Player Arrow Projectile
+      value: Blue Arrow Projectile
       objectReference: {fileID: 0}
     - target: {fileID: 4471611805007110010, guid: 44126a3f708fcfb48a039f5e3fc5ed12, type: 3}
       propertyPath: m_RootOrder

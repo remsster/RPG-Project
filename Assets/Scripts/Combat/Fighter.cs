@@ -3,6 +3,7 @@
 using RPG.Movement;
 using RPG.Core;
 using RPG.Saving;
+using RPG.Attributes;
 
 namespace RPG.Combat
 {
@@ -10,10 +11,12 @@ namespace RPG.Combat
     {
 
         [SerializeField] private float timeBetweenAttacks = 1f;
-        [SerializeField] private Transform rightHandTransform = null;
-        [SerializeField] private Transform leftHandTransform = null;
-        [SerializeField] private Weapon defaultWeapon = null;
+        [SerializeField] private Transform rightHandTransform;
+        [SerializeField] private Transform leftHandTransform;
         [SerializeField] private string defaultWeaponName = "Unarmed";
+        // default weapon is assigned in the engine
+        // the default is unarmed
+        [SerializeField] private Weapon defaultWeapon;
         
 
         private readonly int attackTriggerHash = Animator.StringToHash("attack");

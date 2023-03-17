@@ -153,8 +153,8 @@ MonoBehaviour:
   timeBetweenAttacks: 1
   rightHandTransform: {fileID: 0}
   leftHandTransform: {fileID: 0}
-  defaultWeapon: {fileID: 0}
   defaultWeaponName: Unarmed
+  defaultWeapon: {fileID: 0}
 --- !u!114 &4691094893614133598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,5 +222,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingLevel: 1
-  chaatacterClass: 1
+  characterClass: 1
   progression: {fileID: 11400000, guid: c49c34c58ab43be49a2471bb28e7435d, type: 2}

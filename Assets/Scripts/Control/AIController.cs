@@ -1,11 +1,10 @@
+using System;
 using UnityEngine;
-
 
 using RPG.Movement;
 using RPG.Combat;
 using RPG.Core;
-using System;
-using UnityEngine.AI;
+using RPG.Attributes;
 
 namespace RPG.Control
 {
@@ -23,7 +22,6 @@ namespace RPG.Control
         private Fighter fighter;
         private Health health;
         private Mover mover;
-        private NavMeshAgent navMeshAgent;
         private Vector3 guardPosition;
         private int currentWaypointIndex = 0;
 
@@ -31,7 +29,7 @@ namespace RPG.Control
         private float timeSpentAtWaypoint = Mathf.Infinity;
 
         // ---------------------------------------------------------------------------------
-        // Unity Methods
+        // Unity Engine Methods
         // ---------------------------------------------------------------------------------
 
         private void Awake()
@@ -40,7 +38,6 @@ namespace RPG.Control
             fighter = GetComponent<Fighter>();
             health = GetComponent<Health>();
             mover = GetComponent<Mover>();
-            navMeshAgent = GetComponent<NavMeshAgent>();
         }
 
         private void Start()
@@ -53,7 +50,6 @@ namespace RPG.Control
             if (health.IsDead) { return; }
             if (InAttackRange() && fighter.CanAttack(player))
             {
-                //navMeshAgent.speed = chaseSpeed;
                 AttackBehaviour();
             }
             else if (timeSinceLastSawPlayer < suspicionTime)
@@ -62,7 +58,6 @@ namespace RPG.Control
             }
             else
             {
-                // navMeshAgent.speed = patrolSpeed;
                 PatrolBehaviour();
             }
 

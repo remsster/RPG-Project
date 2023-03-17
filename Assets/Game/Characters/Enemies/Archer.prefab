@@ -64,6 +64,10 @@ PrefabInstance:
       value: Archer
       objectReference: {fileID: 0}
     - target: {fileID: 2290979359364707371, guid: 67d6de81b41693542869ce68ef2771d2, type: 3}
+      propertyPath: characterClass
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290979359364707371, guid: 67d6de81b41693542869ce68ef2771d2, type: 3}
       propertyPath: chaatacterClass
       value: 3
       objectReference: {fileID: 0}

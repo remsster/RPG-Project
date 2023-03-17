@@ -63,6 +63,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Archer
       objectReference: {fileID: 0}
+    - target: {fileID: 2290979359364707371, guid: 67d6de81b41693542869ce68ef2771d2, type: 3}
+      propertyPath: chaatacterClass
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2733271938976430969, guid: 67d6de81b41693542869ce68ef2771d2, type: 3}
       propertyPath: maxSpeed
       value: 4

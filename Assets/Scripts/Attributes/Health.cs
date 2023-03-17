@@ -40,6 +40,11 @@ namespace RPG.Attributes
 
         // ---- Public ----
 
+        public float GetHealthPercentage()
+        {
+            return 100 * (healthPoints / GetComponent<BaseStats>().Health);
+        }
+
         public void TakeDamage(float damage)
         {
             healthPoints = Mathf.Max(healthPoints - damage, 0);

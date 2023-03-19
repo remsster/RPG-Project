@@ -14,6 +14,7 @@ namespace RPG.Combat
         [SerializeField] private GameObject[] destroyOnHit;
         private Health target;
         private float damage = 0;
+        private GameObject instigator;
 
         // ---------------------------------------------------------------------------------
         // Unity Engine Methods
@@ -38,7 +39,7 @@ namespace RPG.Combat
         {
             if (collision.GetComponent<Health>() != target) return;
             if (target.IsDead) return;
-            target.TakeDamage(damage);
+            target.TakeDamage(instigator, damage);
             speed = 0;
             if (hitEffect != null) { Instantiate(hitEffect, AimLocation, transform.rotation); }
             foreach(GameObject go in destroyOnHit)
@@ -62,10 +63,11 @@ namespace RPG.Combat
         private Vector3 AimLocation => target.TryGetComponent<CapsuleCollider>(out CapsuleCollider targetCollider) ?
             targetCollider.transform.position + Vector3.up * targetCollider.height / 2 : targetCollider.transform.position;
 
-        public void SetTarget(Health target, float damage)
+        public void SetTarget(Health target,GameObject instigator, float damage)
         {
             this.target = target;
             this.damage = damage;
+            this.instigator = instigator;
             Destroy(gameObject, maxLifeTime);
         }
     }

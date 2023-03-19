@@ -63,6 +63,8 @@ namespace RPG.Attributes
             }
         }
 
+        // ---- ISaveable ----
+
         public object CaptureState()
         {
             return healthPoints;

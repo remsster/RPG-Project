@@ -7,6 +7,8 @@ namespace RPG.Attributes
     {
         [SerializeField] private float experiencePoints = 0;
 
+        public float ExperiencePoints => experiencePoints;
+
 
         // ---- Public ----
 

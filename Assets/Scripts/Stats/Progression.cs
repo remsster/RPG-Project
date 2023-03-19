@@ -7,14 +7,20 @@ namespace RPG.Stats
     {
         [SerializeField] ProgressionCharacterClass[] characterClasses;
 
-        public float GetHealth(CharacterClass characterClass, int level)
+        public float GetStat(Stat stat, CharacterClass characterClass, int level)
         {
             foreach(ProgressionCharacterClass progressionCharacter in characterClasses)
             {
-                if (characterClass == progressionCharacter.CharacterClass)
+                if (characterClass != progressionCharacter.CharacterClass) continue;
+
+                foreach(var progressionStat in progressionCharacter.stats)
                 {
-                    // return progressionCharacter.Health[level-1];
+                    if (progressionStat.stat != stat) continue;
+                    // guard againsted array out of bounds
+                    if (progressionStat.levels.Length < level) continue;
+                    return progressionStat.levels[level - 1];
                 }
+                
             }
             return 0;
         }
@@ -23,7 +29,7 @@ namespace RPG.Stats
         class ProgressionCharacterClass
         {
             [SerializeField] private CharacterClass characterClass;
-            [SerializeField] private ProgressionStat[] stats;
+            [SerializeField] public ProgressionStat[] stats;
 
             public CharacterClass CharacterClass => characterClass;
         }

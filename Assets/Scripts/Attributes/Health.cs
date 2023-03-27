@@ -8,13 +8,18 @@ namespace RPG.Attributes
 {
     public class Health : MonoBehaviour, ISaveable
     {
+        [SerializeField] float regenerationPercentage = 70f;
+
         private float healthPoints = -1f;
 
         private readonly int deathTriggerHash = Animator.StringToHash("die");
         
         private bool isDead;
 
+        private BaseStats baseStats;
+
         public bool IsDead => isDead;
+
 
         // ---------------------------------------------------------------------------------
         // Unity Engine Methods
@@ -22,10 +27,16 @@ namespace RPG.Attributes
 
         private void Awake()
         {
+            baseStats = GetComponent<BaseStats>();
             if (healthPoints < 0)
             {
                 healthPoints = GetComponent<BaseStats>().GetStat(Stat.Health);
             }
+        }
+
+        private void Start()
+        {
+            baseStats.onLevelUp += RegenerateHealth;
         }
 
         // ---------------------------------------------------------------------------------
@@ -33,6 +44,13 @@ namespace RPG.Attributes
         // ---------------------------------------------------------------------------------
 
         // ---- Private ----
+
+        private void RegenerateHealth()
+        {
+
+            float regenHealthPoints = baseStats.GetStat(Stat.Health) * (regenerationPercentage / 100);
+            healthPoints = Mathf.Max(healthPoints, regenHealthPoints);
+        }
 
         private void Die()
         {

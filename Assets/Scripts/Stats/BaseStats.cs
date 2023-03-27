@@ -1,6 +1,6 @@
 
-using UnityEditorInternal;
 using UnityEngine;
+
 namespace RPG.Stats
 { 
     public class BaseStats : MonoBehaviour
@@ -10,9 +10,39 @@ namespace RPG.Stats
         [SerializeField] private CharacterClass characterClass;
         [SerializeField] private Progression progression;
 
+        private int curentLevel = 0;
+
+        private void Start()
+        {
+            curentLevel = CalculateLevel();
+            Experience experience = GetComponent<Experience>();
+            if (experience != null)
+            {
+                experience.onExperienceGained += UpdateLevel;
+            }
+        }
+
+        private void UpdateLevel()
+        {
+            int newLevel = CalculateLevel();
+            if (newLevel > curentLevel)
+            {
+                curentLevel = newLevel;
+                print("BaseStat: Leveled Up!");
+            }
+        }
+
+        private int GetLevel()
+        {
+            if (curentLevel < 1) curentLevel = CalculateLevel();
+            return curentLevel;
+        }
+        
+
         public float GetStat(Stat stat) => progression.GetStat(stat, characterClass, GetLevel());
 
-        public int GetLevel()
+
+        public int CalculateLevel()
         {
             Experience experience = GetComponent<Experience>();
             if (experience == null) return startingLevel;

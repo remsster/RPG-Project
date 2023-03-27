@@ -3,7 +3,6 @@
 using RPG.Saving;
 using RPG.Stats;
 using RPG.Core;
-using System;
 
 namespace RPG.Attributes
 {

@@ -10,12 +10,13 @@ namespace RPG.SceneManagement
         const string DEFAULT_SAVE_FILE = "save";
         [SerializeField] float fadeInTime = 0.2f;
 
-        private IEnumerator Start()
+        // ---------------------------------------------------------------------------------
+        // Unity Engine Methods
+        // ---------------------------------------------------------------------------------
+
+        private void Awake()
         {
-            Fader fader = FindObjectOfType<Fader>();
-            fader.FadeOutImmediate();
-            yield return GetComponent<SavingSystem>().LoadLastScene(DEFAULT_SAVE_FILE);
-            yield return fader.FadeIn(fadeInTime);
+            StartCoroutine(LoadLastScene());
         }
 
         private void Update()
@@ -33,6 +34,18 @@ namespace RPG.SceneManagement
                 Delete();
             }
 
+        }
+
+        // ---------------------------------------------------------------------------------
+        // Custom Methods
+        // ---------------------------------------------------------------------------------
+
+        private IEnumerator LoadLastScene()
+        {
+            Fader fader = FindObjectOfType<Fader>();
+            fader.FadeOutImmediate();
+            yield return GetComponent<SavingSystem>().LoadLastScene(DEFAULT_SAVE_FILE);
+            yield return fader.FadeIn(fadeInTime);
         }
 
         private void Delete()

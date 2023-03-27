@@ -7,17 +7,9 @@ namespace RPG.Stats
     [CreateAssetMenu(fileName="Progression",menuName="RPG Project/Progression", order=0)]
     public class Progression : ScriptableObject
     {
-        [SerializeField] ProgressionCharacterClass[] characterClasses;
+        [SerializeField] private ProgressionCharacterClass[] characterClasses;
 
-        Dictionary<CharacterClass, Dictionary<Stat, float[]>> lookupTable;
-
-        public float GetStat(Stat stat, CharacterClass characterClass, int level)
-        {
-            BuildLookup();
-            float[] levels = lookupTable[characterClass][stat];
-            if (levels.Length < level) return 0;
-            else return levels[level - 1];
-        }
+        private Dictionary<CharacterClass, Dictionary<Stat, float[]>> lookupTable;
 
         private void BuildLookup()
         {
@@ -29,7 +21,7 @@ namespace RPG.Stats
             {
                 Dictionary<Stat, float[]> statLookupTable = new Dictionary<Stat, float[]>();
 
-                foreach(ProgressionStat progressionStat in progressionClass.stats)
+                foreach (ProgressionStat progressionStat in progressionClass.stats)
                 {
                     statLookupTable[progressionStat.stat] = progressionStat.levels;
                 }
@@ -37,6 +29,23 @@ namespace RPG.Stats
                 lookupTable[progressionClass.CharacterClass] = statLookupTable;
             }
         }
+
+        public float GetStat(Stat stat, CharacterClass characterClass, int level)
+        {
+            BuildLookup();
+            float[] levels = lookupTable[characterClass][stat];
+            if (levels.Length < level) return 0;
+            else return levels[level - 1];
+        }
+
+        public int GetLevels(Stat stat, CharacterClass characterClass)
+        {
+            BuildLookup();
+            float[] levels = lookupTable[characterClass][stat];
+            return levels.Length;
+        }
+
+        
 
         [System.Serializable]
         class ProgressionCharacterClass

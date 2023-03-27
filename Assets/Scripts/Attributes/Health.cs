@@ -9,7 +9,7 @@ namespace RPG.Attributes
 {
     public class Health : MonoBehaviour, ISaveable
     {
-        [SerializeField] private float healthPoints = 100f;
+        private float healthPoints = -1f;
 
         private readonly int deathTriggerHash = Animator.StringToHash("die");
         
@@ -23,7 +23,10 @@ namespace RPG.Attributes
 
         private void Awake()
         {
-            healthPoints = GetComponent<BaseStats>().GetStat(Stat.Health);
+            if (healthPoints < 0)
+            {
+                healthPoints = GetComponent<BaseStats>().GetStat(Stat.Health);
+            }
         }
 
         // ---------------------------------------------------------------------------------

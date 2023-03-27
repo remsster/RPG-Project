@@ -106,7 +106,6 @@ namespace RPG.Saving
             string path = GetPathFromSaveFile(saveFile);
             if (File.Exists(path))
             {
-                print("File Deleted");
                 File.Delete(path);
             }
         }

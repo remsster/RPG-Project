@@ -38,16 +38,19 @@ namespace RPG.SceneManagement
         private void Delete()
         {
             GetComponent<SavingSystem>().Delete(DEFAULT_SAVE_FILE);
+            print("File Deleted");
         }
 
         public void Load()
         {
             GetComponent<SavingSystem>().Load(DEFAULT_SAVE_FILE);
+            print("Game Loaded");
         }
 
         public void Save()
         {
             GetComponent<SavingSystem>().Save(DEFAULT_SAVE_FILE);
+            print("Game Saved");
         }
     }
 }

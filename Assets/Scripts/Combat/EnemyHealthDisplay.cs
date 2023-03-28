@@ -24,7 +24,7 @@ namespace RPG.Combat
                 return;
             }
             Health health = fighter.Target;
-            healthValue.text = $"{health.GetHealthPercentage().ToString("0")}%";
+            healthValue.text = $"{health.HealthPoints.ToString("0")}/{health.MaxHealthPoints.ToString("0")}";
         }
     }
 }

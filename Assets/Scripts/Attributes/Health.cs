@@ -20,6 +20,9 @@ namespace RPG.Attributes
 
         public bool IsDead => isDead;
 
+        public float HealthPoints => healthPoints;
+        public float MaxHealthPoints => GetComponent<BaseStats>().GetStat(Stat.Health);
+
 
         // ---------------------------------------------------------------------------------
         // Unity Engine Methods
@@ -47,7 +50,6 @@ namespace RPG.Attributes
 
         private void RegenerateHealth()
         {
-
             float regenHealthPoints = baseStats.GetStat(Stat.Health) * (regenerationPercentage / 100);
             healthPoints = Mathf.Max(healthPoints, regenHealthPoints);
         }
@@ -75,6 +77,7 @@ namespace RPG.Attributes
 
         public void TakeDamage(GameObject instigator, float damage)
         {
+            print(gameObject.name + " took damage: " + damage);
             healthPoints = Mathf.Max(healthPoints - damage, 0);
             if (healthPoints == 0)
             {

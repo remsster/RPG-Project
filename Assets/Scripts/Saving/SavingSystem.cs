@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -84,19 +83,16 @@ namespace RPG.Saving
 
         public IEnumerator LoadLastScene(string saveFile)
         {
-            // 1 get state
             Dictionary<string, object> state = LoadFile(saveFile);
-            if(state.ContainsKey("lastSceneBuildIndex"))
+            int buildIndex = SceneManager.GetActiveScene().buildIndex;
+            if (state.ContainsKey("lastSceneBuildIndex"))
             {
-                // 2 load last scene
-                int buildIndex = (int)state["lastSceneBuildIndex"];
                 if (buildIndex != SceneManager.GetActiveScene().buildIndex)
                 {
-                    // only load if the build index is not the active scene
-                    yield return SceneManager.LoadSceneAsync(buildIndex);
+                    buildIndex = (int)state["lastSceneBuildIndex"];
                 }
             }
-            // 3 restore state in new scene
+            yield return SceneManager.LoadSceneAsync(buildIndex);
             RestoreState(state);
 
         }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 namespace RPG.Stats
@@ -34,8 +35,8 @@ namespace RPG.Stats
         {
             BuildLookup();
             float[] levels = lookupTable[characterClass][stat];
-            if (levels.Length < level) return 0;
-            else return levels[level - 1];
+            if (levels.Length < level) return levels[levels.Length-1]; // at mac level
+            else return levels[level - 1]; // below max level
         }
 
         public int GetLevels(Stat stat, CharacterClass characterClass)

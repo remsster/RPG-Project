@@ -49,7 +49,7 @@ namespace RPG.Combat
 
             // this will be null if it's the root animator controller
             // otherwise it will have the AnimatorOverrideController
-            var overrideController = animator.runtimeAnimatorController as AnimatorOverrideController;
+            AnimatorOverrideController overrideController = animator.runtimeAnimatorController as AnimatorOverrideController;
 
             if (animatorOverride != null)
             {

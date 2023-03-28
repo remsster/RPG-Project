@@ -15,6 +15,12 @@ namespace RPG.Stats
 
         private int curentLevel = 0;
 
+
+        // ---------------------------------------------------------------------------------
+        // Unity Engine Methods
+        // ---------------------------------------------------------------------------------
+
+
         private void Start()
         {
             curentLevel = CalculateLevel();
@@ -36,6 +42,12 @@ namespace RPG.Stats
             }
         }
 
+        // ---------------------------------------------------------------------------------
+        // Custom Methods
+        // ---------------------------------------------------------------------------------
+
+        // ---- Private ----
+
         private void LevelUpEffect()
         {
             Instantiate(levelUpParticleEffect, transform);            
@@ -46,10 +58,21 @@ namespace RPG.Stats
             if (curentLevel < 1) curentLevel = CalculateLevel();
             return curentLevel;
         }
-        
 
-        public float GetStat(Stat stat) => progression.GetStat(stat, characterClass, GetLevel());
+        private float GetAdditiveModifier(Stat stat)
+        {
+            float total = 0;
+            foreach(IModifierProvider provider in GetComponents<IModifierProvider>())
+            {
+                foreach(float modifier in provider.GetAdditiveModifier(stat))
+                {
+                    total += modifier;
+                }
+            }
+            return total;
+        }
 
+        // ---- Public ----
 
         public int CalculateLevel()
         {
@@ -68,5 +91,8 @@ namespace RPG.Stats
             }
             return penultimateLevel + 1;
         }
+
+
+        public float GetStat(Stat stat) => progression.GetStat(stat, characterClass, GetLevel()) + GetAdditiveModifier(stat);
     }
 }

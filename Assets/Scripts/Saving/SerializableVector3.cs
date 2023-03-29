@@ -2,6 +2,9 @@
 
 namespace RPG.Saving
 {
+
+    // Unity's Vector3 is not serializable
+
     [System.Serializable]
     public class SerializableVector3
     {

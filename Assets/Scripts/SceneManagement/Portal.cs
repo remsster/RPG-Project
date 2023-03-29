@@ -1,6 +1,4 @@
-﻿
-using RPG.Saving;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -33,7 +31,6 @@ namespace RPG.SceneManagement
 
         private IEnumerator Transition()
         {
-
             if (sceneToLoad < 0)
             {
                 Debug.LogError("Cannot load scene");
@@ -66,7 +63,6 @@ namespace RPG.SceneManagement
             player.transform.rotation = otherPortal.spawnPoint.rotation;
             player.GetComponent<NavMeshAgent>().enabled = true;
             // player.GetComponent<NavMeshAgent>().Warp(otherPortal.spawnPoint.position);
-
         }
 
         private Portal GetOtherPortal()

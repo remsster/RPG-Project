@@ -6,6 +6,10 @@ namespace RPG.Control
     {
         private const float RADIUS = 0.3F;
 
+        // ---------------------------------------------------------------------------------
+        // Unity Engine Methods
+        // ---------------------------------------------------------------------------------
+
         private void OnDrawGizmos()
         {
             for(int i = 0; i < transform.childCount; i++)
@@ -15,6 +19,10 @@ namespace RPG.Control
                 Gizmos.DrawLine(GetWaypoint(i), GetWaypoint(j));
             }
         }
+
+        // ---------------------------------------------------------------------------------
+        // Custom Methods
+        // ---------------------------------------------------------------------------------
 
         public int GetNextIndex(int i)
         {

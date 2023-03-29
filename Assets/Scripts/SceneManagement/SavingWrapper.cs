@@ -57,7 +57,6 @@ namespace RPG.SceneManagement
         public void Load()
         {
             GetComponent<SavingSystem>().Load(DEFAULT_SAVE_FILE);
-            print("Game Loaded");
         }
 
         public void Save()

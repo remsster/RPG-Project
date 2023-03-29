@@ -19,7 +19,6 @@ namespace RPG.Combat
         // default weapon is assigned in the engine
         // the default is unarmed
         [SerializeField] private Weapon defaultWeapon;
-        
 
         private readonly int attackTriggerHash = Animator.StringToHash("attack");
         private readonly int stopAttackHash = Animator.StringToHash("stopAttack");

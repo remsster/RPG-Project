@@ -14,21 +14,39 @@ namespace RPG.Stats
 
         public event Action onLevelUp;
 
-        private int curentLevel = 1;
+        private int curentLevel = 0;
+
+        Experience experience;
 
 
         // ---------------------------------------------------------------------------------
         // Unity Engine Methods
         // ---------------------------------------------------------------------------------
 
+        private void Awake()
+        {
+            experience = GetComponent<Experience>();
+        }
+
 
         private void Start()
         {
             curentLevel = CalculateLevel();
-            Experience experience = GetComponent<Experience>();
+        }
+
+        private void OnEnable()
+        {
             if (experience != null)
             {
                 experience.onExperienceGained += UpdateLevel;
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (experience != null)
+            {
+                experience.onExperienceGained -= UpdateLevel;
             }
         }
 
@@ -53,8 +71,6 @@ namespace RPG.Stats
         {
             Instantiate(levelUpParticleEffect, transform);
         }
-
-
 
         private float GetAdditiveModifier(Stat stat)
         {
@@ -85,12 +101,15 @@ namespace RPG.Stats
         }
 
         private float GetBaseStat(Stat stat) => progression.GetStat(stat, characterClass, GetLevel());
-        
+
 
         // ---- Public ----
 
+        public float GetStat(Stat stat) => GetBaseStat(stat) + GetAdditiveModifier(stat) * (1 + GetPercentageModifier(stat) / 100);
+
         public int GetLevel()
         {
+            if (curentLevel < 1) curentLevel = CalculateLevel();
             return curentLevel;
         }
 
@@ -111,10 +130,5 @@ namespace RPG.Stats
             }
             return penultimateLevel + 1;
         }
-
-
-        public float GetStat(Stat stat) => GetBaseStat(stat) + GetAdditiveModifier(stat) * (1 + GetPercentageModifier(stat) / 100);
-
-        
     }
 }

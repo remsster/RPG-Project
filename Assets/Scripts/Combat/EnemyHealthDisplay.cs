@@ -1,13 +1,13 @@
-using RPG.Attributes;
 using TMPro;
 using UnityEngine;
+
+using RPG.Attributes;
 
 namespace RPG.Combat
 {
     public class EnemyHealthDisplay : MonoBehaviour
     {
         private Fighter fighter;
-        
         private TextMeshProUGUI healthValue;
 
         private void Awake()

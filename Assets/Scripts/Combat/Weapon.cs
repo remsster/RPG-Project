@@ -2,8 +2,6 @@ using UnityEngine;
 
 using RPG.Attributes;
 
-
-
 namespace RPG.Combat
 {
     [CreateAssetMenu(fileName = "Weapon", menuName = "Weapons/Make New Weapon",order = 0)]
@@ -64,7 +62,6 @@ namespace RPG.Combat
                 animator.runtimeAnimatorController = overrideController.runtimeAnimatorController;
             }
         }
-
 
         public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator, float calculatedDamage)
         {

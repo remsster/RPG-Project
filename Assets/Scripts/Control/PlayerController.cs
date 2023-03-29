@@ -8,7 +8,7 @@ namespace RPG.Control
 {
     public class PlayerController : MonoBehaviour
     {
-        Health health;
+        private Health health;
 
         // ---------------------------------------------------------------------------------
         // Unity Engine Methods

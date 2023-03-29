@@ -11,15 +11,11 @@ namespace RPG.Attributes
         [SerializeField] float regenerationPercentage = 70f;
 
         private float healthPoints = -1f;
-
-        private readonly int deathTriggerHash = Animator.StringToHash("die");
-        
         private bool isDead;
-
         private BaseStats baseStats;
+        private readonly int deathTriggerHash = Animator.StringToHash("die");
 
         public bool IsDead => isDead;
-
         public float HealthPoints => healthPoints;
         public float MaxHealthPoints => GetComponent<BaseStats>().GetStat(Stat.Health);
 
@@ -37,7 +33,12 @@ namespace RPG.Attributes
             }
         }
 
-        private void Start()
+        private void OnEnable()
+        {
+            baseStats.onLevelUp += RegenerateHealth;
+        }
+
+        private void OnDisable()
         {
             baseStats.onLevelUp += RegenerateHealth;
         }

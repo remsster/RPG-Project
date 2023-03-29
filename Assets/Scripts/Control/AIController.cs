@@ -60,7 +60,6 @@ namespace RPG.Control
             {
                 PatrolBehaviour();
             }
-
             UpdateTimers();
         }
 

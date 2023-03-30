@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 
+using GameDevTV.Utils;
+
 using RPG.Movement;
 using RPG.Combat;
 using RPG.Core;
@@ -22,7 +24,7 @@ namespace RPG.Control
         private Fighter fighter;
         private Health health;
         private Mover mover;
-        private Vector3 guardPosition;
+        private LazyValue<Vector3> guardPosition;
         private int currentWaypointIndex = 0;
 
         private float timeSinceLastSawPlayer = Mathf.Infinity;
@@ -38,11 +40,12 @@ namespace RPG.Control
             fighter = GetComponent<Fighter>();
             health = GetComponent<Health>();
             mover = GetComponent<Mover>();
+            guardPosition = new LazyValue<Vector3>(GetGuardPosition);
         }
 
         private void Start()
         {
-            guardPosition = transform.position;
+            guardPosition.ForceInit();
         }
 
         private void Update()
@@ -78,6 +81,11 @@ namespace RPG.Control
 
         // ---- Private ----
 
+        private Vector3 GetGuardPosition()
+        {
+            return transform.position;
+        }
+
         private void UpdateTimers()
         {
             timeSinceLastSawPlayer += Time.deltaTime;
@@ -92,7 +100,7 @@ namespace RPG.Control
 
         private void PatrolBehaviour()
         {
-            Vector3 nextPosition = guardPosition;
+            Vector3 nextPosition = guardPosition.value;
 
             if (patrolPath != null)
             {

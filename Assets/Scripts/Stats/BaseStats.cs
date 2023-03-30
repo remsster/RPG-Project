@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 
+using GameDevTV.Utils;
+
 namespace RPG.Stats
 {
     public class BaseStats : MonoBehaviour
@@ -14,7 +16,7 @@ namespace RPG.Stats
 
         public event Action onLevelUp;
 
-        private int curentLevel = 0;
+        private LazyValue<int> curentLevel;
 
         Experience experience;
 
@@ -26,12 +28,13 @@ namespace RPG.Stats
         private void Awake()
         {
             experience = GetComponent<Experience>();
+            curentLevel = new LazyValue<int>(CalculateLevel);
         }
 
 
         private void Start()
         {
-            curentLevel = CalculateLevel();
+            curentLevel.ForceInit();
         }
 
         private void OnEnable()
@@ -53,9 +56,9 @@ namespace RPG.Stats
         private void UpdateLevel()
         {
             int newLevel = CalculateLevel();
-            if (newLevel > curentLevel)
+            if (newLevel > curentLevel.value)
             {
-                curentLevel = newLevel;
+                curentLevel.value = newLevel;
                 LevelUpEffect();
                 onLevelUp();
             }
@@ -107,11 +110,8 @@ namespace RPG.Stats
 
         public float GetStat(Stat stat) => GetBaseStat(stat) + GetAdditiveModifier(stat) * (1 + GetPercentageModifier(stat) / 100);
 
-        public int GetLevel()
-        {
-            if (curentLevel < 1) curentLevel = CalculateLevel();
-            return curentLevel;
-        }
+        public int GetLevel() => curentLevel.value;
+        
 
         public int CalculateLevel()
         {

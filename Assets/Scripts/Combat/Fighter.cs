@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+using GameDevTV.Utils;
+
 using RPG.Movement;
 using RPG.Core;
 using RPG.Saving;
@@ -25,18 +27,20 @@ namespace RPG.Combat
 
         private Health target;
         private float timeSinceLastAttack = Mathf.Infinity;
-        private Weapon currentWeapon;
+        private LazyValue<Weapon> currentWeapon;
 
         // ---------------------------------------------------------------------------------
         // Unity Engine Methods
         // ---------------------------------------------------------------------------------
 
+        private void Awake()
+        {
+            currentWeapon = new LazyValue<Weapon>(SetupDefaultWeapon);
+        }
+
         private void Start()
         {
-            if (currentWeapon == null)
-            {
-                EquipWeapon(defaultWeapon);
-            }
+            currentWeapon.ForceInit();
         }
 
         private void Update()
@@ -65,6 +69,12 @@ namespace RPG.Combat
 
         // ---- Private ----
 
+        private Weapon SetupDefaultWeapon()
+        {
+            AttachWeapon(defaultWeapon);
+            return defaultWeapon;
+        }
+
         private void AttackBehaviour()
         {
             transform.LookAt(target.transform);
@@ -89,9 +99,9 @@ namespace RPG.Combat
             if (target == null) { return; }
             float damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
             // float damage = 5f;
-            if (currentWeapon.HasProjectile)
+            if (currentWeapon.value.HasProjectile)
             {
-                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject, damage);
+                currentWeapon.value.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject, damage);
             } 
             else
             {
@@ -110,7 +120,7 @@ namespace RPG.Combat
         {
             //float distance = Vector3.Distance(transform.position, target.position);
             float distance = (transform.position - target.position).magnitude;
-            return (distance < currentWeapon.Range);
+            return (distance < currentWeapon.value.Range);
         }
 
         private void StopAttack()
@@ -132,7 +142,12 @@ namespace RPG.Combat
 
         public void EquipWeapon(Weapon weapon)
         {
-            currentWeapon = weapon;
+            currentWeapon.value = weapon;
+            AttachWeapon(weapon);
+        }
+
+        private void AttachWeapon(Weapon weapon)
+        {
             Animator animator = GetComponent<Animator>();
             weapon.Spawn(rightHandTransform, leftHandTransform, animator);
         }
@@ -155,7 +170,7 @@ namespace RPG.Combat
         // ---- ISaveable Methods ----
         public object CaptureState()
         {
-            return currentWeapon.name;
+            return currentWeapon.value.name;
         }
 
         public void RestoreState(object state)
@@ -170,7 +185,7 @@ namespace RPG.Combat
         {
             if (stat == Stat.Damage)
             {
-                yield return currentWeapon.Damage;
+                yield return currentWeapon.value.Damage;
             }
         }
 
@@ -178,7 +193,7 @@ namespace RPG.Combat
         {
             if (stat == Stat.Damage)
             {
-                yield return currentWeapon.PercentageBonus;
+                yield return currentWeapon.value.PercentageBonus;
             }
         }
     }

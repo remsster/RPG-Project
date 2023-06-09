@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 using RPG.Movement;
 using RPG.Attributes;
-
+using System;
 
 namespace RPG.Control
 {
@@ -70,7 +70,7 @@ namespace RPG.Control
         /// <returns>Returns true if the GameIbject is interactable and false otherwise</returns>
         private bool InteractWithComponent()
         {
-            RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
+            RaycastHit[] hits = RaycastAllSorted();
             foreach (RaycastHit hit in hits)
             {
                 IRaycastable[] raycastables = hit.transform.GetComponents<IRaycastable>();
@@ -102,6 +102,27 @@ namespace RPG.Control
                 return true;
             }
             return false;
+        }
+
+        /// <summary>
+        /// Sort raycast GameObjects by distance
+        /// </summary>
+        /// <returns>Sorted raycast array</returns>
+        private RaycastHit[] RaycastAllSorted()
+        {
+            // Get all hits
+            RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
+            // sort by distance
+            // -- build the array of distances
+            float[] distances = new float[hits.Length];
+            for (int i = 0; i < hits.Length; i++)
+            {
+                distances[i] = hits[i].distance;
+            }
+            // -- sort the hits
+            Array.Sort(distances, hits);
+            // return array
+            return hits;
         }
 
         private static Ray GetMouseRay()

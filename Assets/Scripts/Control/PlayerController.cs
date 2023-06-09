@@ -3,12 +3,31 @@
 using RPG.Movement;
 using RPG.Combat;
 using RPG.Attributes;
+using System;
 
 namespace RPG.Control
 {
     public class PlayerController : MonoBehaviour
     {
         private Health health;
+
+        private enum CursorType
+        {
+            None,
+            Movement,
+            Combat
+        }
+
+        [System.Serializable]
+        private struct CursorMapping
+        {
+            public CursorType type;
+            public Texture2D texture;
+            public Vector2 hotspot;
+        }
+
+        [SerializeField] private CursorMapping[] cursorMappings;
+
 
         // ---------------------------------------------------------------------------------
         // Unity Engine Methods
@@ -24,6 +43,7 @@ namespace RPG.Control
             if (health.IsDead) { return; }
             if (InteractWithCombat()) return;
             if (InteractWithMovement()) return;
+            SetCursor(CursorType.None);
         }
 
         // ---------------------------------------------------------------------------------
@@ -47,6 +67,7 @@ namespace RPG.Control
                 {
                     GetComponent<Fighter>().Attack(target.gameObject);
                 }
+                SetCursor(CursorType.Combat);
                 return true;
             }
             // We didnt find any combat targets to interact with
@@ -65,6 +86,7 @@ namespace RPG.Control
                 {
                     GetComponent<Mover>().StartMoveAction(hit.point,1f);
                 }
+                SetCursor(CursorType.Movement);
                 return true;
             }
             return false;
@@ -73,6 +95,24 @@ namespace RPG.Control
         private static Ray GetMouseRay()
         {
             return Camera.main.ScreenPointToRay(Input.mousePosition);
+        }
+
+        private void SetCursor(CursorType type)
+        {
+            CursorMapping mapping = GetCursorMapping(type);
+            Cursor.SetCursor(mapping.texture, mapping.hotspot, CursorMode.Auto);
+        }
+
+        private CursorMapping GetCursorMapping(CursorType type)
+        {
+            foreach(CursorMapping mapping in cursorMappings)
+            {
+                if (type == mapping.type)
+                {
+                    return mapping;
+                }
+            }
+            return cursorMappings[0];
         }
     }
 }

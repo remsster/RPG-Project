@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using RPG.Movement;
 using RPG.Attributes;
 using System;
+using UnityEngine.AI;
 
 namespace RPG.Control
 {
@@ -22,6 +23,7 @@ namespace RPG.Control
         }
 
         [SerializeField] private CursorMapping[] cursorMappings;
+        [SerializeField] private float maxNavMeshProjectionDistance = 1f;
 
 
         // ---------------------------------------------------------------------------------
@@ -88,20 +90,35 @@ namespace RPG.Control
 
         private bool InteractWithMovement()
         {
-            Ray ray = GetMouseRay();
-            RaycastHit hit;
-            bool hasHit = Physics.Raycast(ray, out hit);
+            Vector3 target;
+            bool hasHit = RaycastNavMesh(out target);
             if (hasHit)
             {
 
                 if (Input.GetMouseButton(0))
                 {
-                    GetComponent<Mover>().StartMoveAction(hit.point,1f);
+                    GetComponent<Mover>().StartMoveAction(target,1f);
                 }
                 SetCursor(CursorType.Movement);
                 return true;
             }
             return false;
+        }
+
+        private bool RaycastNavMesh(out Vector3 target)
+        {
+            target = new Vector3();
+            // Raycast to terrain
+            RaycastHit hit;
+            bool hasHit = Physics.Raycast(GetMouseRay(),out hit);
+            if (!hasHit) return false;
+            // Find nearist navmesh point
+            NavMeshHit navMeshHit;
+            bool hasCastToNavMesh = NavMesh.SamplePosition(hit.point, out navMeshHit, maxNavMeshProjectionDistance, NavMesh.AllAreas);
+            if (!hasCastToNavMesh) return false;
+            // return true if found
+            target = navMeshHit.position;
+            return true;
         }
 
         /// <summary>

@@ -2,7 +2,6 @@
 using UnityEngine.EventSystems;
 
 using RPG.Movement;
-using RPG.Combat;
 using RPG.Attributes;
 
 
@@ -12,13 +11,7 @@ namespace RPG.Control
     {
         private Health health;
 
-        private enum CursorType
-        {
-            None,
-            Movement,
-            Combat,
-            UI
-        }
+        
 
         [System.Serializable]
         private struct CursorMapping
@@ -85,7 +78,7 @@ namespace RPG.Control
                 {
                     if (raycastable.HandleRayCast(this))
                     {
-                        SetCursor(CursorType.Combat);
+                        SetCursor(raycastable.GetCursorType());
                         return true;
                     }
                 }

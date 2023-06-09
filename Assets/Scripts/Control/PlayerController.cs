@@ -5,6 +5,7 @@ using RPG.Movement;
 using RPG.Combat;
 using RPG.Attributes;
 
+
 namespace RPG.Control
 {
     public class PlayerController : MonoBehaviour
@@ -41,13 +42,13 @@ namespace RPG.Control
 
         private void Update()
         {
+            if (InteractWithComponent()) return;
             if (InteractWithUI()) return;
             if (health.IsDead) 
             {
                 SetCursor(CursorType.None);
                 return; 
             }
-            if (InteractWithCombat()) return;
             if (InteractWithMovement()) return;
             SetCursor(CursorType.None);
         }
@@ -69,25 +70,26 @@ namespace RPG.Control
             return false;
         }
 
-        private bool InteractWithCombat()
+        /// <summary>
+        /// Generic interaction method that interacts with enemies and pickups
+        /// possible to scale using IRaycastable
+        /// </summary>
+        /// <returns>Returns true if the GameIbject is interactable and false otherwise</returns>
+        private bool InteractWithComponent()
         {
             RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
             foreach (RaycastHit hit in hits)
             {
-                CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-                if (target == null) continue;
-
-                
-                if (!GetComponent<Fighter>().CanAttack(target.gameObject)) continue;
-
-                if (Input.GetMouseButton(0))
+                IRaycastable[] raycastables = hit.transform.GetComponents<IRaycastable>();
+                foreach (IRaycastable raycastable in raycastables)
                 {
-                    GetComponent<Fighter>().Attack(target.gameObject);
+                    if (raycastable.HandleRayCast(this))
+                    {
+                        SetCursor(CursorType.Combat);
+                        return true;
+                    }
                 }
-                SetCursor(CursorType.Combat);
-                return true;
             }
-            // We didnt find any combat targets to interact with
             return false;
         }
 

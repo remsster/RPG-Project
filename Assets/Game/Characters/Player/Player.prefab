@@ -112,7 +112,7 @@ PrefabInstance:
       objectReference: {fileID: 4131338793123720863}
     - target: {fileID: 6772489076501270395, guid: 4c09af74b7c6f664ca3a539ffe1cdcc1, type: 3}
       propertyPath: startingLevel
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6772489076501270395, guid: 4c09af74b7c6f664ca3a539ffe1cdcc1, type: 3}
       propertyPath: characterClass
@@ -186,6 +186,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7090293463235808337, guid: 4c09af74b7c6f664ca3a539ffe1cdcc1, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7656069748626583411, guid: 4c09af74b7c6f664ca3a539ffe1cdcc1, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -257,3 +261,5 @@ MonoBehaviour:
   - type: 4
     texture: {fileID: 2800000, guid: f8c873f1e53e83f4aabf342d6be1dfc3, type: 3}
     hotspot: {x: 0, y: 0}
+  maxNavMeshProjectionDistance: 1
+  maxNavMeshPathLength: 40

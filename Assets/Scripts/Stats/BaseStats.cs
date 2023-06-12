@@ -7,6 +7,8 @@ namespace RPG.Stats
 {
     public class BaseStats : MonoBehaviour
     {
+        // The player always starts from level 1 as it has the experience component
+        // This currently cannot be adjusted in the editor for the player only
         [Range(1, 99)]
         [SerializeField] private int startingLevel = 1;
         [SerializeField] private CharacterClass characterClass;

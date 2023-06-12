@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Health Bar
       objectReference: {fileID: 0}
+    - target: {fileID: 7013589787588494457, guid: 57711f90fab67484fa5428b30f640a40, type: 3}
+      propertyPath: healthComponent
+      value: 
+      objectReference: {fileID: 7729201314410203807}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57711f90fab67484fa5428b30f640a40, type: 3}
 --- !u!1001 &4771431279767665488
@@ -216,6 +220,17 @@ MonoBehaviour:
   dwellTime: 5
   patrolSpeedFraction: 0.2
   patrolPath: {fileID: 0}
+--- !u!114 &7729201314410203807 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -6236319052623892017, guid: 4c09af74b7c6f664ca3a539ffe1cdcc1, type: 3}
+  m_PrefabInstance: {fileID: 4771431279767665488}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2155959316514798759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d0dd240ff7adb44931c857a01a3e32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6423675795962115859
 PrefabInstance:
   m_ObjectHideFlags: 0

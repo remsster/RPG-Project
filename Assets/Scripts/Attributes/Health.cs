@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 using GameDevTV.Utils;
 
 using RPG.Saving;
 using RPG.Stats;
 using RPG.Core;
-using UnityEngine.Events;
 
 namespace RPG.Attributes
 {
@@ -13,6 +13,7 @@ namespace RPG.Attributes
     {
         [SerializeField] private float regenerationPercentage = 70f;
         [SerializeField] private TakeDamageEvent takeDamage;
+        [SerializeField] private UnityEvent onDie;
 
         [System.Serializable]
         public class TakeDamageEvent : UnityEvent<float> { }
@@ -96,6 +97,7 @@ namespace RPG.Attributes
             if (healthPoints.value == 0)
             {
                 Die();
+                onDie.Invoke();
                 AwardExperience(instigator);       
             }
             else

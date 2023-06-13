@@ -6,6 +6,7 @@ using GameDevTV.Utils;
 using RPG.Saving;
 using RPG.Stats;
 using RPG.Core;
+using System;
 
 namespace RPG.Attributes
 {
@@ -22,11 +23,6 @@ namespace RPG.Attributes
         private bool isDead;
         private BaseStats baseStats;
         private readonly int deathTriggerHash = Animator.StringToHash("die");
-
-        public bool IsDead => isDead;
-        public float HealthPoints => healthPoints.value;
-        public float MaxHealthPoints => GetComponent<BaseStats>().GetStat(Stat.Health);
-
 
         // ---------------------------------------------------------------------------------
         // Unity Engine Methods
@@ -86,9 +82,20 @@ namespace RPG.Attributes
 
         // ---- Public ----
 
+        public bool IsDead() => isDead;
+
+        public float GetHealthPoints() => healthPoints.value;
+
+        public float GetMaxHealthPoints() => GetComponent<BaseStats>().GetStat(Stat.Health);
+
         public float GetHealthPercentage() => 100 * GetFraction();
 
         public float GetFraction() => (healthPoints.value / GetComponent<BaseStats>().GetStat(Stat.Health));
+
+        public void Heal(float healthToRestore)
+        {
+            healthPoints.value = Mathf.Min(healthPoints.value + healthToRestore, GetMaxHealthPoints());
+        }
 
         public void TakeDamage(GameObject instigator, float damage)
         {
@@ -120,5 +127,7 @@ namespace RPG.Attributes
                 Die();
             }
         }
+
+        
     }
 }

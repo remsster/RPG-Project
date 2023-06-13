@@ -52,7 +52,7 @@ namespace RPG.Combat
             timeSinceLastAttack += Time.deltaTime;
 
             if (target == null) return;
-            if (target.IsDead) { return; }
+            if (target.IsDead()) { return; }
 
             if (!IsInRange(target.transform))
             {
@@ -164,7 +164,7 @@ namespace RPG.Combat
         {
             if (combatTarget == null) return false;
             Health targetToTest = combatTarget.GetComponent<Health>();
-            return combatTarget != null && !targetToTest.IsDead;
+            return combatTarget != null && !targetToTest.IsDead();
         } 
 
         // ---- IAction Methods ----

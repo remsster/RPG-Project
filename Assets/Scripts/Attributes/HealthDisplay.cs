@@ -16,7 +16,7 @@ namespace RPG.Attributes
 
         private void Update()
         {
-            healthValue.text = $"{health.HealthPoints.ToString("0")}/{health.MaxHealthPoints.ToString("0")}";
+            healthValue.text = $"{health.GetHealthPoints().ToString("0")}/{health.GetMaxHealthPoints().ToString("0")}";
         }
     }
 }

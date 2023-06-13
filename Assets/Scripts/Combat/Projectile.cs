@@ -32,7 +32,7 @@ namespace RPG.Combat
         private void Update()
         {
             if (target == null) return;
-            if (isHoaming && !target.IsDead)
+            if (isHoaming && !target.IsDead())
             {
                 transform.LookAt(AimLocation);
             }
@@ -42,7 +42,7 @@ namespace RPG.Combat
         private void OnTriggerEnter(Collider collision)
         {
             if (collision.GetComponent<Health>() != target) return;
-            if (target.IsDead) return;
+            if (target.IsDead()) return;
             target.TakeDamage(instigator, damage);
             speed = 0;
             onHit.Invoke();

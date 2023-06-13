@@ -16,6 +16,7 @@ namespace RPG.Control
         [SerializeField] private float suspicionTime = 5f;
         [SerializeField] private float waypointTollerance = 1f; // its basically the stopping distance
         [SerializeField] private float dwellTime = 5f;
+        [SerializeField] private float aggrevatedCooldownTime = 5f;
         [Range(0, 1)]
         [SerializeField] private float patrolSpeedFraction = 0.2f;
         [SerializeField] private PatrolPath patrolPath;
@@ -28,6 +29,7 @@ namespace RPG.Control
         private int currentWaypointIndex = 0;
 
         private float timeSinceLastSawPlayer = Mathf.Infinity;
+        private float timeSinceAggrevated = Mathf.Infinity;
         private float timeSpentAtWaypoint = Mathf.Infinity;
 
         // ---------------------------------------------------------------------------------
@@ -51,7 +53,7 @@ namespace RPG.Control
         private void Update()
         {
             if (health.IsDead()) { return; }
-            if (InAttackRange() && fighter.CanAttack(player))
+            if (IsAggrevated() && fighter.CanAttack(player))
             {
                 AttackBehaviour();
             }
@@ -90,12 +92,13 @@ namespace RPG.Control
         {
             timeSinceLastSawPlayer += Time.deltaTime;
             timeSpentAtWaypoint += Time.deltaTime;
+            timeSinceAggrevated += Time.deltaTime;
         }
 
-        private bool InAttackRange()
+        private bool IsAggrevated()
         {
             float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
-            return distanceToPlayer < chaseDistance;
+            return distanceToPlayer < chaseDistance || timeSinceAggrevated < aggrevatedCooldownTime;
         }
 
         private void PatrolBehaviour()
@@ -141,6 +144,13 @@ namespace RPG.Control
         {
             timeSinceLastSawPlayer = 0;
             fighter.Attack(player);
+        }
+
+        // ---- Private ----
+
+        public void Aggrevate()
+        {
+            timeSinceAggrevated = 0;
         }
     }
 

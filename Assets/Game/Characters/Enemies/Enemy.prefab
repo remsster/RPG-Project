@@ -72,6 +72,34 @@ PrefabInstance:
       propertyPath: health
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: -6236319052623892017, guid: 4c09af74b7c6f664ca3a539ffe1cdcc1, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -6236319052623892017, guid: 4c09af74b7c6f664ca3a539ffe1cdcc1, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6236319052623892017, guid: 4c09af74b7c6f664ca3a539ffe1cdcc1, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 6249505820601055449}
+    - target: {fileID: -6236319052623892017, guid: 4c09af74b7c6f664ca3a539ffe1cdcc1, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6236319052623892017, guid: 4c09af74b7c6f664ca3a539ffe1cdcc1, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Aggrevate
+      objectReference: {fileID: 0}
+    - target: {fileID: -6236319052623892017, guid: 4c09af74b7c6f664ca3a539ffe1cdcc1, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: RPG.Control.AIController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: -6236319052623892017, guid: 4c09af74b7c6f664ca3a539ffe1cdcc1, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1489502437, guid: 4c09af74b7c6f664ca3a539ffe1cdcc1, type: 3}
       propertyPath: m_Avatar
       value: 
@@ -154,7 +182,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7090293463235808337, guid: 4c09af74b7c6f664ca3a539ffe1cdcc1, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7090293463235808337, guid: 4c09af74b7c6f664ca3a539ffe1cdcc1, type: 3}
       propertyPath: m_LocalPosition.y

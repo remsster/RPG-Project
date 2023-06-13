@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
+using RPG.Control;
+
 namespace RPG.SceneManagement
 {
     public class Portal : MonoBehaviour
@@ -40,18 +42,26 @@ namespace RPG.SceneManagement
             DontDestroyOnLoad(this.gameObject);
             Fader fader = FindObjectOfType<Fader>();
             SavingWrapper savingWraper = FindObjectOfType<SavingWrapper>();
+            // Remove Control
+            PlayerController playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+            playerController.enabled = false;
 
             yield return fader.FadeOut(fadeOutTime);
             savingWraper.Save();
             yield return SceneManager.LoadSceneAsync(sceneToLoad);
+            // Remove Control
+            PlayerController newPlayerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+            newPlayerController.enabled = false;
 
             Portal otherPortal = GetOtherPortal();
             savingWraper.Load();
             UpdatePlayer(otherPortal);
             savingWraper.Save();
             yield return new WaitForSeconds(fadeWaitTime);
-            yield return fader.FadeIn(fadeInTime);
+            fader.FadeIn(fadeInTime);
 
+            // restore control
+            newPlayerController.enabled = true;
             Destroy(this.gameObject);
         }
 

@@ -41,17 +41,17 @@ namespace RPG.SceneManagement
             canvasGroup.alpha = 1;
         }
 
-        public IEnumerator Fade(float target, float time)
+        public Coroutine Fade(float target, float time)
         {
             if (currentlyActiveFade != null)
             {
                 StopCoroutine(currentlyActiveFade);
             }
             currentlyActiveFade = StartCoroutine(FadeRoutine(target, time));
-            yield return currentlyActiveFade;
+            return currentlyActiveFade;
         }
 
-        public IEnumerator FadeOut(float time) => Fade(1, time);
-        public IEnumerator FadeIn(float time) => Fade(0, time);
+        public Coroutine FadeOut(float time) => Fade(1, time);
+        public Coroutine FadeIn(float time) => Fade(0, time);
     }
 }

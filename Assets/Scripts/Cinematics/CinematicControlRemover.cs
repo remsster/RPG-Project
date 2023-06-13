@@ -8,7 +8,7 @@ namespace RPG.Cinematics
     public class CinematicControlRemover : MonoBehaviour
     {
         private PlayableDirector playableDirector;
-        GameObject player;
+        private GameObject player;
 
         private void Awake()
         {

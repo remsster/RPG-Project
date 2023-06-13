@@ -137,7 +137,6 @@ namespace RPG.Control
             {
                 total += Vector3.Distance(path.corners[i], path.corners[i + 1]);
             }
-            Debug.Log("Total path: " + total);
             return total;
         }
 

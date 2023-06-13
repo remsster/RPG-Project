@@ -20,14 +20,14 @@ namespace RPG.Combat
         [SerializeField] private string defaultWeaponName = "Unarmed";
         // default weapon is assigned in the engine
         // the default is unarmed
-        [SerializeField] private Weapon defaultWeapon;
+        [SerializeField] private WeaponConfig defaultWeapon;
 
         private readonly int attackTriggerHash = Animator.StringToHash("attack");
         private readonly int stopAttackHash = Animator.StringToHash("stopAttack");
 
         private Health target;
         private float timeSinceLastAttack = Mathf.Infinity;
-        private LazyValue<Weapon> currentWeapon;
+        private LazyValue<WeaponConfig> currentWeapon;
 
         // ---------------------------------------------------------------------------------
         // Unity Engine Methods
@@ -35,7 +35,7 @@ namespace RPG.Combat
 
         private void Awake()
         {
-            currentWeapon = new LazyValue<Weapon>(SetupDefaultWeapon);
+            currentWeapon = new LazyValue<WeaponConfig>(SetupDefaultWeapon);
         }
 
         private void Start()
@@ -69,7 +69,7 @@ namespace RPG.Combat
 
         // ---- Private ----
 
-        private Weapon SetupDefaultWeapon()
+        private WeaponConfig SetupDefaultWeapon()
         {
             AttachWeapon(defaultWeapon);
             return defaultWeapon;
@@ -140,13 +140,13 @@ namespace RPG.Combat
             target = combatTarget.GetComponent<Health>();
         }
 
-        public void EquipWeapon(Weapon weapon)
+        public void EquipWeapon(WeaponConfig weapon)
         {
             currentWeapon.value = weapon;
             AttachWeapon(weapon);
         }
 
-        private void AttachWeapon(Weapon weapon)
+        private void AttachWeapon(WeaponConfig weapon)
         {
             Animator animator = GetComponent<Animator>();
             weapon.Spawn(rightHandTransform, leftHandTransform, animator);
@@ -176,7 +176,7 @@ namespace RPG.Combat
         public void RestoreState(object state)
         {
             string weaponName = (string)state;
-            Weapon weapon = Resources.Load<Weapon>(weaponName);
+            WeaponConfig weapon = Resources.Load<WeaponConfig>(weaponName);
             EquipWeapon(weapon);
         }
 

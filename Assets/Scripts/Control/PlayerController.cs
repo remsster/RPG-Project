@@ -24,6 +24,7 @@ namespace RPG.Control
 
         [SerializeField] private CursorMapping[] cursorMappings;
         [SerializeField] private float maxNavMeshProjectionDistance = 1f;
+        [SerializeField] private float raycastRadius = 1f;
         
 
 
@@ -138,7 +139,7 @@ namespace RPG.Control
         private RaycastHit[] RaycastAllSorted()
         {
             // Get all hits
-            RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
+            RaycastHit[] hits = Physics.SphereCastAll(GetMouseRay(),raycastRadius);
             // sort by distance
             // -- build the array of distances
             float[] distances = new float[hits.Length];

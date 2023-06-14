@@ -246,6 +246,8 @@ MonoBehaviour:
   suspicionTime: 5
   waypointTollerance: 1
   dwellTime: 5
+  aggrevatedCooldownTime: 5
+  shoutDistance: 5
   patrolSpeedFraction: 0.2
   patrolPath: {fileID: 0}
 --- !u!114 &7729201314410203807 stripped

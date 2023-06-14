@@ -17,6 +17,7 @@ namespace RPG.Control
         [SerializeField] private float waypointTollerance = 1f; // its basically the stopping distance
         [SerializeField] private float dwellTime = 5f;
         [SerializeField] private float aggrevatedCooldownTime = 5f;
+        [SerializeField] private float shoutDistance = 5f;
         [Range(0, 1)]
         [SerializeField] private float patrolSpeedFraction = 0.2f;
         [SerializeField] private PatrolPath patrolPath;
@@ -144,9 +145,23 @@ namespace RPG.Control
         {
             timeSinceLastSawPlayer = 0;
             fighter.Attack(player);
+
+            AggrevateNearbyEnemies();
         }
 
-        // ---- Private ----
+        private void AggrevateNearbyEnemies()
+        {
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position, shoutDistance, Vector3.up, 0);
+            foreach(RaycastHit hit in hits)
+            {
+                if (hit.transform.TryGetComponent<AIController>(out AIController ai))
+                {
+                    ai.Aggrevate();
+                }
+            }
+        }
+
+        // ---- Public ----
 
         public void Aggrevate()
         {

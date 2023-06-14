@@ -126,9 +126,7 @@ namespace RPG.Combat
 
         private bool IsInRange(Transform target)
         {
-            //float distance = Vector3.Distance(transform.position, target.position);
-            float distance = (transform.position - target.position).magnitude;
-            return (distance < currentWeaponConfig.Range);
+            return Vector3.Distance(transform.position, target.position) < currentWeaponConfig.Range;
         }
 
         private void StopAttack()
@@ -163,7 +161,7 @@ namespace RPG.Combat
         public bool CanAttack(GameObject combatTarget) 
         {
             if (combatTarget == null) return false;
-            if (!GetComponent<Mover>().CanMoveTo(combatTarget.transform.position)) return false;
+            if (!GetComponent<Mover>().CanMoveTo(combatTarget.transform.position) && !IsInRange(combatTarget.transform)) return false;
             Health targetToTest = combatTarget.GetComponent<Health>();
             return combatTarget != null && !targetToTest.IsDead();
         } 
